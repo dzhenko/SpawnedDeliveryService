@@ -9,6 +9,7 @@
     using SDS.Clould.Models;
     using System.Collections.Generic;
 
+    [AllowAnonymous]
     public class StatsController : BaseApiController
     {
         public StatsController(ISDSData data) : base(data)
@@ -22,7 +23,6 @@
         /// <summary>
         /// Returns statistics about the system - all packages, finished/active transports and users count
         /// </summary>
-        [AllowAnonymous]
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -36,9 +36,17 @@
         }
 
         /// <summary>
+        /// Returns all the available towns in Bulgaria
+        /// </summary>
+        [HttpGet]
+        public IHttpActionResult Towns()
+        {
+            return this.Ok(TownsProvider.Towns);
+        }
+
+        /// <summary>
         /// "Ugly" Method used to seed data
         /// </summary>
-        [AllowAnonymous]
         [HttpGet]
         public IHttpActionResult SeedData(string password)
         {
