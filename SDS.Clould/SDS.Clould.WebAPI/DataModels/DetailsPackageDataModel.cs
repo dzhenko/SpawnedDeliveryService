@@ -16,7 +16,7 @@
                 {
                     Id = p.Id,
                     TransportId = p.TransportId,
-                    PictureURL = p.PictureURL,
+                    PictureURL = p.PictureURL == null ? ImageUpload.ImageUploader.DefaultUrl : p.PictureURL,
                     Price = p.Price,
                     Space = p.Space,
                     Kilograms = p.Kilograms,

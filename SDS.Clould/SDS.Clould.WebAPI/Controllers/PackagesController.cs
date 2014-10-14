@@ -8,19 +8,23 @@
 
     using SDS.Clould.Data;
     using SDS.Clould.WebAPI.DataModels;
+    using SDS.Clould.WebAPI.Providers;
+    using SDS.Clould.ImageUpload;
 
     [Authorize]
     public class PackagesController : BaseApiController
     {
         private const int ResultsPerPage = 10;
+        private IImageUploader imageUploader;
 
-        public PackagesController(ISDSData data)
+        public PackagesController(ISDSData data, IImageUploader imageUploader)
             : base(data)
         {
+            this.imageUploader = imageUploader;
         }
 
         public PackagesController()
-            : this(new SDSData())
+            : this(new SDSData(), new ImageUploader())
         {
         }
 
@@ -34,8 +38,8 @@
                 return this.BadRequest(ModelState);
             }
 
-            // var imageUrl = magic <-- if not in model
-            var package = NewPackageDataModel.FromModel(model, User.Identity.GetUserId() /*, imageUrl*/);
+            var pictureUrl = model.Picture == null ? null : this.imageUploader.UrlFromBase64Image(model.Picture);
+            var package = NewPackageDataModel.FromModel(model, User.Identity.GetUserId(), pictureUrl);
 
             this.Data.Packages.Add(package);
             this.Data.SaveChanges();

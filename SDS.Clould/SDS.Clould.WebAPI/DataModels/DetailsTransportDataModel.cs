@@ -18,8 +18,9 @@
                     Id = t.Id,
                     FromTown = t.FromTown,
                     ToTown = t.ToTown,
-                    AvailableSpace = t.AvailableSpace,
-                    AvailableKilograms = t.AvailableKilograms,
+                    AvailableSpace = t.AvailableSpace - t.Packages.Sum(p => p.Space),
+                    AvailableKilograms = t.AvailableKilograms - t.Packages.Sum(p => p.Kilograms),
+                    TotalPrice = t.Packages.Sum(p => p.Price),
                     Departure = t.Departure,
                     Arrival = t.Arrival,
                     DriverName = t.Driver.UserName,
@@ -38,6 +39,8 @@
         public int AvailableSpace { get; set; }
 
         public int AvailableKilograms { get; set; }
+
+        public decimal TotalPrice { get; set; }
 
         public DateTime Departure { get; set; }
 

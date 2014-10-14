@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDS.Clould.Data", "SDS.Clou
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDS.Clould.Models", "SDS.Clould.Models\SDS.Clould.Models.csproj", "{1810B3D1-9E95-4F00-96DE-B680AF064F70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDS.Clould.ImageUpload", "SDS.Clould.ImageUpload\SDS.Clould.ImageUpload.csproj", "{6EE12F8F-3420-4DD6-8CE0-CCD91D9968CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1810B3D1-9E95-4F00-96DE-B680AF064F70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1810B3D1-9E95-4F00-96DE-B680AF064F70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1810B3D1-9E95-4F00-96DE-B680AF064F70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EE12F8F-3420-4DD6-8CE0-CCD91D9968CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EE12F8F-3420-4DD6-8CE0-CCD91D9968CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EE12F8F-3420-4DD6-8CE0-CCD91D9968CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EE12F8F-3420-4DD6-8CE0-CCD91D9968CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,7 +10,7 @@
     public class NewPackageDataModel
     {
                                                                                    // taken from the model or passed
-        public static Package FromModel(NewPackageDataModel model, string ownerId, string pictureUrl = null)
+        public static Package FromModel(NewPackageDataModel model, string ownerId, string pictureUrl)
         {
             return new Package()
             {
@@ -22,11 +22,12 @@
                 Space = model.Space,
                 ToTown = model.ToTown,
                 UserId = ownerId,
-                PictureURL = pictureUrl == null ? model.PictureURL : pictureUrl
+                PictureURL = pictureUrl
             };
         }
 
-        public string PictureURL { get; set; }
+        [Required]
+        public string Picture { get; set; }
 
         public decimal Price { get; set; }
 

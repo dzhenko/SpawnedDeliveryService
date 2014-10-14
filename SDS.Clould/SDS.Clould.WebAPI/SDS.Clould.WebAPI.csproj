@@ -235,6 +235,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Providers\TownsProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -308,6 +309,10 @@
     <ProjectReference Include="..\SDS.Clould.Data\SDS.Clould.Data.csproj">
       <Project>{9d18fe3f-34ee-4f1d-ae1b-de3350feaddc}</Project>
       <Name>SDS.Clould.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SDS.Clould.ImageUpload\SDS.Clould.ImageUpload.csproj">
+      <Project>{6ee12f8f-3420-4dd6-8ce0-ccd91d9968ce}</Project>
+      <Name>SDS.Clould.ImageUpload</Name>
     </ProjectReference>
     <ProjectReference Include="..\SDS.Clould.Models\SDS.Clould.Models.csproj">
       <Project>{1810b3d1-9e95-4f00-96de-b680af064f70}</Project>
