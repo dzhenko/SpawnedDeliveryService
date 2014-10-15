@@ -32,7 +32,14 @@
         {
             if (model == null || !ModelState.IsValid)
             {
-                return this.BadRequest(ModelState);
+                try
+                {
+                    return this.BadRequest(ModelState.Values.FirstOrDefault().Errors.FirstOrDefault().ErrorMessage);
+                }
+                catch (Exception)
+                {
+                    return this.BadRequest("Invalid create transport data");
+                }
             }
 
             var transport = NewTransportDataModel.FromModel(model, User.Identity.GetUserId());
@@ -40,7 +47,7 @@
             this.Data.Transports.Add(transport);
             this.Data.SaveChanges();
 
-            return this.Created("", model);
+            return this.Created("", transport.Id);
         }
 
         /// <summary>
@@ -78,6 +85,69 @@
             return this.Ok(this.Data.Transports.All()
                 .Where(t => t.Arrival < DateTime.Now)
                 .Select(FinishedTransportDataModel.FromData));
+        }
+
+        /// <summary>
+        /// Transports that are compleated
+        /// </summary>
+        [HttpPost]
+        public IHttpActionResult AddPackage(AddPackageToTransportDataModel model)
+        {
+            if (model == null || !ModelState.IsValid)
+            {
+                try
+                {
+                    return this.BadRequest(ModelState.Values.FirstOrDefault().Errors.FirstOrDefault().ErrorMessage);
+                }
+                catch (Exception)
+                {
+                    return this.BadRequest("Invalid package/transport data");
+                }
+            }
+
+            var package = this.Data.Packages.Find(model.PackageId);
+            if (package == null)
+            {
+                return this.BadRequest("Invalid package Id");
+            }
+
+            var transport = this.Data.Transports.Find(model.TransportId);
+            if (transport == null)
+            {
+                return this.BadRequest("Invalid transport Id");
+            }
+
+            if (package.Kilograms > transport.AvailableKilograms - transport.Packages.Sum(p => p.Kilograms))
+            {
+                return this.BadRequest("Not enough kilograms left on the transport");
+            }
+
+            if (package.Space > transport.AvailableSpace - transport.Packages.Sum(p => p.Space))
+            {
+                return this.BadRequest("Not enough space left on the transport");
+            }
+
+            if (transport.Packages.Any(p => p.Id == package.Id))
+            {
+                return this.BadRequest("Package is already in the transport");
+            }
+
+            if (transport.Arrival <= DateTime.Now)
+            {
+                return this.BadRequest("This tranposrt is already compleated");
+            }
+
+            if (transport.Arrival <= package.Deadline)
+            {
+                return this.BadRequest("This package needs to get to " + package.ToTown + " sooner!");
+            }
+
+            transport.Packages.Add(package);
+            this.Data.Transports.Update(transport);
+            this.Data.Packages.Update(package);
+            this.Data.SaveChanges();
+
+            return this.Ok();
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Security.Claims;
@@ -325,7 +326,14 @@ namespace SDS.Clould.WebAPI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                try
+                {
+                    return this.BadRequest(ModelState.Values.FirstOrDefault().Errors.FirstOrDefault().ErrorMessage);
+                }
+                catch (Exception)
+                {
+                    return this.BadRequest("Invalid register data");
+                }
             }
 
             var user = new User() { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNumber };
@@ -334,7 +342,7 @@ namespace SDS.Clould.WebAPI.Controllers
 
             if (!result.Succeeded)
             {
-                return GetErrorResult(result);
+                return this.BadRequest(result.Errors.FirstOrDefault());
             }
 
             return Ok();

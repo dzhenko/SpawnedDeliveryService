@@ -35,7 +35,14 @@
         {
             if (model == null || !ModelState.IsValid)
             {
-                return this.BadRequest(ModelState);
+                try
+                {
+                    return this.BadRequest(ModelState.Values.FirstOrDefault().Errors.FirstOrDefault().ErrorMessage);
+                }
+                catch (Exception)
+                {
+                    return this.BadRequest("Invalid create package data");
+                }
             }
 
             var pictureUrl = model.Picture == null ? null : this.imageUploader.UrlFromBase64Image(model.Picture);
@@ -44,7 +51,7 @@
             this.Data.Packages.Add(package);
             this.Data.SaveChanges();
 
-            return this.Created("", package);
+            return this.Created("", package.Id);
         }
 
         /// <summary>
