@@ -43,7 +43,7 @@
 
             var user = this.Data.Users.Find(User.Identity.GetUserId());
 
-            user.Longtitude = model.Longtitude;
+            user.Longitude = model.Longitude;
             user.Latitude = model.Latitude;
 
             this.Data.Users.Update(user);

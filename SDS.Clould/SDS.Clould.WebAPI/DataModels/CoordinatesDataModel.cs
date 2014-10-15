@@ -13,12 +13,12 @@ namespace SDS.Clould.WebAPI.DataModels
                 return u => new CoordinatesDataModel()
                 {
                     Latitude = u.Latitude,
-                    Longtitude = u.Longtitude
+                    Longitude = u.Longitude
                 };
             }
         }
 
-        public double Longtitude { get; set; }
+        public double Longitude { get; set; }
 
         public double Latitude { get; set; }
     }

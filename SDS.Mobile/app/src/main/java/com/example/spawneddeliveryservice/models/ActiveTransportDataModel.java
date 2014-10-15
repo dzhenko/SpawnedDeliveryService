@@ -5,20 +5,20 @@ import org.json.JSONObject;
 import java.util.Date;
 
 public class ActiveTransportDataModel {
-    public int Id;
-    public Date ArrivalDate;
-    public String FromTown;
-    public String ToTown;
+    public int id;
+    public Date arrivalDate;
+    public String fromTown;
+    public String toTown;
 
     public static ActiveTransportDataModel FromModel(String json){
         try {
             JSONObject jObject = new JSONObject(json);
             ActiveTransportDataModel returnedModel = new ActiveTransportDataModel();
 
-            returnedModel.Id = jObject.getInt("Id");
-            returnedModel.ArrivalDate = Constants.formatter.parse(jObject.getString("ArrivalDate"));
-            returnedModel.FromTown = jObject.getString("FromTown");
-            returnedModel.ToTown = jObject.getString("ToTown");
+            returnedModel.id = jObject.getInt("Id");
+            returnedModel.arrivalDate = Constants.formatter.parse(jObject.getString("ArrivalDate"));
+            returnedModel.fromTown = jObject.getString("FromTown");
+            returnedModel.toTown = jObject.getString("ToTown");
 
             return returnedModel;
         }
