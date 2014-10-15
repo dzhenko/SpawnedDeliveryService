@@ -3,11 +3,11 @@ package com.example.spawneddeliveryservice.models;
 import java.util.Date;
 
 public class DetailsTransportPackageDataModel {
-    public int Id;
-    public double Price;
-    public int Space;
-    public int Kilograms;
-    public Date Deadline;
-    public String OwnerName;
-    public String OwnerPhone;
+    public int id;
+    public double price;
+    public int space;
+    public int kilograms;
+    public Date deadline;
+    public String ownerName;
+    public String ownerPhone;
 }

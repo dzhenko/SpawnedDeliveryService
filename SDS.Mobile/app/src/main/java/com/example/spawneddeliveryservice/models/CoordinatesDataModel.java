@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 public class CoordinatesDataModel {
     public double latitude;
-    public double longtitude;
+    public double longitude;
 
     public static CoordinatesDataModel FromModel(String json){
         try {
@@ -12,7 +12,7 @@ public class CoordinatesDataModel {
             CoordinatesDataModel returnedModel = new CoordinatesDataModel();
 
             returnedModel.latitude = jObject.getDouble("Latitude");
-            returnedModel.longtitude = jObject.getDouble("Longitude");
+            returnedModel.longitude = jObject.getDouble("Longitude");
 
             return returnedModel;
         }

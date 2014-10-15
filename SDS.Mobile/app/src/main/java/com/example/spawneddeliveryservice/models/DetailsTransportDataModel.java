@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class DetailsTransportDataModel {
-    public int Id;
-    public String FromTown;
-    public String ToTown;
-    public int AvailableSpace;
-    public int AvailableKilograms;
-    public double TotalPrice;
-    public Date Departure;
-    public Date Arrival;
-    public String DriverName;
-    public String DriverNumber;
-    public ArrayList<DetailsTransportPackageDataModel> Packages;
+    public int id;
+    public String fromTown;
+    public String toTown;
+    public int availableSpace;
+    public int availableKilograms;
+    public double totalPrice;
+    public Date departure;
+    public Date arrival;
+    public String driverName;
+    public String driverNumber;
+    public ArrayList<DetailsTransportPackageDataModel> packages;
 }
