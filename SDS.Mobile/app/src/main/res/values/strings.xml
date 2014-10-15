@@ -13,5 +13,6 @@
 
     <string name="apiBaseUrl">http://spawndeliveryservice.apphb.com</string>
     <string name="apiUserRegistration">/api/account/register</string>
+    <string name="apiUserLogin">/api/account/login</string>
 
 </resources>
