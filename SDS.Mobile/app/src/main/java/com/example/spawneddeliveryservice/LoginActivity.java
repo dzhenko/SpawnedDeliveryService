@@ -41,7 +41,7 @@ public class LoginActivity extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
-    public  void attachEvents(){
+    public void attachEvents() {
         btnLogin.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
     }
@@ -57,7 +57,7 @@ public class LoginActivity extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.btnRegister) {
             this.mainActivity.loadRegister();
-        }else if (v.getId() == R.id.btnLogin) {
+        } else if (v.getId() == R.id.btnLogin) {
             this.loginUser();
         }
     }

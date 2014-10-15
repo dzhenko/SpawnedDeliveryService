@@ -11,4 +11,7 @@
     <string name="tvMainLabelConfirmPassword">Confim password</string>
     <string name="tvMainLabelPhoneNumber">Phone number</string>
 
+    <string name="apiBaseUrl">http://spawndeliveryservice.apphb.com</string>
+    <string name="apiUserRegistration">/api/account/register</string>
+
 </resources>
