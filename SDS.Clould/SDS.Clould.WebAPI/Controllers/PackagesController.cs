@@ -10,6 +10,8 @@
     using SDS.Clould.WebAPI.DataModels;
     using SDS.Clould.WebAPI.Providers;
     using SDS.Clould.ImageUpload;
+    using System.Collections.Generic;
+    using SDS.Clould.Models;
 
     [Authorize]
     public class PackagesController : BaseApiController
@@ -52,6 +54,35 @@
             this.Data.SaveChanges();
 
             return this.Created("", package.Id);
+        }
+
+        [HttpGet]
+        public IHttpActionResult Coordinates(int id)
+        {
+            var package = this.Data.Packages.Find(id);
+            if (package == null)
+            {
+                return this.BadRequest("Invalid package id");
+            }
+
+            if (package.Transport == null)
+            {
+                return this.BadRequest("Package does not belog to a transport");
+            }
+
+            if (package.Transport.Departure > DateTime.Now)
+            {
+                return this.BadRequest("Package hasn't shipped yet");
+            }
+
+            if (package.Transport.Arrival < DateTime.Now)
+            {
+                return this.BadRequest("Package is already delivered");
+            }
+
+            var func = CoordinatesDataModel.FromData.Compile();
+
+            return this.Ok(func(package.Transport.Driver));
         }
 
         /// <summary>

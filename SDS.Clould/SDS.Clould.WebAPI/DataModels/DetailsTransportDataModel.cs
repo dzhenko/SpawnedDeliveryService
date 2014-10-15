@@ -23,6 +23,7 @@
                     TotalPrice = t.Packages.Sum(p => p.Price),
                     Departure = t.Departure,
                     Arrival = t.Arrival,
+                    DriverId = t.Driver.Id,
                     DriverName = t.Driver.UserName,
                     DriverNumber = t.Driver.PhoneNumber,
                     Packages = t.Packages.AsQueryable().Select(DetailsTransportPackageDataModel.FromData)
@@ -45,6 +46,8 @@
         public DateTime Departure { get; set; }
 
         public DateTime Arrival { get; set; }
+
+        public string DriverId { get; set; }
 
         public string DriverName { get; set; }
 

@@ -27,6 +27,11 @@
             this.packages = new HashSet<Package>();
             this.transports = new HashSet<Transport>();
         }
+
+        public double Latitude { get; set; }
+
+        public double Longtitude { get; set; }
+
         public virtual ICollection<Transport> Transports
         {
             get
