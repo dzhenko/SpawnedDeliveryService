@@ -216,6 +216,7 @@
     <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Controllers\TransportsController.cs" />
     <Compile Include="DataModels\ActiveTransportDataModel.cs" />
+    <Compile Include="DataModels\AddPackageToTransportDataModel.cs" />
     <Compile Include="DataModels\DetailsPackageDataModel.cs" />
     <Compile Include="DataModels\DetailsTransportDataModel.cs" />
     <Compile Include="DataModels\DetailsTransportPackageDataModel.cs" />
