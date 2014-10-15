@@ -20,7 +20,6 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -83,13 +82,15 @@ public class RegisterActivity extends Fragment implements View.OnClickListener {
     }
 
     private class RegisterUser extends AsyncTask<String, Void, String> {
+        private String registrationUrl, email, password, confirmPassword, phoneNumber;
+
         @Override
         protected String doInBackground(String... params) {
-            String registrationUrl = params[0];
-            String email = params[1];
-            String password = params[2];
-            String confirmPassword = params[3];
-            String phoneNumber = params[4];
+            this.registrationUrl = params[0];
+            this.email = params[1];
+            this.password = params[2];
+            this.confirmPassword = params[3];
+            this.phoneNumber = params[4];
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(registrationUrl);
             httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -137,20 +138,11 @@ public class RegisterActivity extends Fragment implements View.OnClickListener {
             } else {
                 try {
                     JSONObject jObject = new JSONObject(result);
-                    String errorsAsString = jObject.getString("ModelState");
-                    JSONObject annonymousErrors = new JSONObject(errorsAsString);
-                    JSONArray errors = annonymousErrors.getJSONArray("");
-                    for (int i = 0; i < errors.length(); i++) {
-                        try {
-                            String errorMessage = errors.getString(i);
-                            Toast.makeText(
-                                    context,
-                                    errorMessage,
-                                    Toast.LENGTH_SHORT).show();
-
-                        } catch (JSONException e) {
-                        }
-                    }
+                    String errorsAsString = jObject.getString("Message");
+                    Toast.makeText(
+                            context,
+                            errorsAsString,
+                            Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     Toast.makeText(
                             context,
@@ -183,11 +175,6 @@ public class RegisterActivity extends Fragment implements View.OnClickListener {
         String registrationUrl = getResources().getString(R.string.apiBaseUrl) + getResources().getString(R.string.apiUserRegistration);
         RegisterUser registerUser = new RegisterUser();
         registerUser.execute(registrationUrl, emailText, passwordText, confirmPasswordText, number);
-
-//        Toast.makeText(
-//                this.context,
-//                registrationUrl,
-//                Toast.LENGTH_SHORT).show();
     }
 
     @Override

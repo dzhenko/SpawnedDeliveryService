@@ -113,24 +113,33 @@ public class LoginActivity extends Fragment implements View.OnClickListener {
 
             try {
                 JSONObject jObject = new JSONObject(result);
-                String token = jObject.getString("access_token");
-                String userName = jObject.getString("userName");
-                if (token == null || userName == null || token == "" || userName == "") {
+                try {
+                    String token = jObject.getString("access_token");
+                    String userName = jObject.getString("userName");
+                    if (token == null || userName == null || token == "" || userName == "") {
+                        Toast.makeText(
+                                context,
+                                "Login failed",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    UserData data = new UserData();
+                    data.setToken(token);
+                    data.setUsername(userName);
                     Toast.makeText(
                             context,
-                            "Login failed",
+                            "Hello, " + data.getUsername(),
                             Toast.LENGTH_SHORT).show();
-                    return;
+                    mainActivity.loadRegister();
+                } catch (JSONException e) {
+                    String errorDescription = jObject.getString("error_description");
+                    Toast.makeText(
+                            context,
+                            errorDescription,
+                            Toast.LENGTH_SHORT).show();
                 }
 
-                UserData data = new UserData();
-                data.setToken(token);
-                data.setUsername(userName);
-                Toast.makeText(
-                        context,
-                        data.getUsername() + " is logged with token: " + data.getToken(),
-                        Toast.LENGTH_SHORT).show();
-                mainActivity.loadRegister();
             } catch (JSONException e) {
                 Toast.makeText(
                         context,
@@ -140,9 +149,7 @@ public class LoginActivity extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void loginUser() {
-        String emailText = email.getText().toString();
-        String passwordText = password.getText().toString();
+    public void loginUser(String emailText, String passwordText) {
 
         if (passwordText == "") {
             Toast.makeText(
@@ -166,7 +173,9 @@ public class LoginActivity extends Fragment implements View.OnClickListener {
         if (v.getId() == R.id.btnRegister) {
             this.mainActivity.loadRegister();
         } else if (v.getId() == R.id.btnLogin) {
-            this.loginUser();
+            String emailText = email.getText().toString();
+            String passwordText = password.getText().toString();
+            this.loginUser(emailText, passwordText);
         }
     }
 }
