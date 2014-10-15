@@ -18,7 +18,7 @@ public class PendingTransportDataModel {
             returnedModel.id = jObject.getInt("Id");
             returnedModel.fromTown = jObject.getString("FromTown");
             returnedModel.toTown = jObject.getString("ToTown");
-            returnedModel.deadline = Constants.formatter.parse(jObject.getString("Deadline"));
+            returnedModel.deadline = ConstantsDataModels.formatter.parse(jObject.getString("Deadline"));
 
             return returnedModel;
         }

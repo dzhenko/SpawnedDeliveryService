@@ -20,7 +20,7 @@ public class FinishedTransportDataModel {
             returnedModel.id = jObject.getInt("Id");
             returnedModel.fromTown = jObject.getString("FromTown");
             returnedModel.toTown = jObject.getString("ToTown");
-            returnedModel.arrival = Constants.formatter.parse(jObject.getString("Arrival"));
+            returnedModel.arrival = ConstantsDataModels.formatter.parse(jObject.getString("Arrival"));
             returnedModel.driverName = jObject.getString("DriverName");
             returnedModel.driverPhone = jObject.getString("DriverPhone");
 

@@ -16,7 +16,7 @@ public class ActiveTransportDataModel {
             ActiveTransportDataModel returnedModel = new ActiveTransportDataModel();
 
             returnedModel.id = jObject.getInt("Id");
-            returnedModel.arrivalDate = Constants.formatter.parse(jObject.getString("ArrivalDate"));
+            returnedModel.arrivalDate = ConstantsDataModels.formatter.parse(jObject.getString("ArrivalDate"));
             returnedModel.fromTown = jObject.getString("FromTown");
             returnedModel.toTown = jObject.getString("ToTown");
 

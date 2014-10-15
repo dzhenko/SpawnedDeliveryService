@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.spawneddeliveryservice.models.Constants;
+import com.example.spawneddeliveryservice.models.ConstantsDataModels;
 import com.example.spawneddeliveryservice.models.Stats;
 
 import java.text.ParseException;
@@ -80,7 +80,7 @@ public class StatsDataSource {
         stats.setPackages(cursor.getInt(2));
         stats.setTransports(cursor.getInt(3));
         try {
-            stats.setUpdated(Constants.formatter.parse(cursor.getString(4)));
+            stats.setUpdated(ConstantsDataModels.formatter.parse(cursor.getString(4)));
         } catch (ParseException e) {
             e.printStackTrace();
             stats.setUpdated(new Date());

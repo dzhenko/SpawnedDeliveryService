@@ -12,6 +12,10 @@
     <string name="tvMainLabelPhoneNumber">Phone number</string>
 
     <string name="apiBaseUrl">http://spawndeliveryservice.apphb.com</string>
+    <string name="apiTransports">/api/transports/</string>
+    <string name="apiPackages">/api/packages/</string>
+    <string name="apiStats">/api/stats/</string>
+    <string name="apiUsers">/api/users/</string>
     <string name="apiUserRegistration">/api/account/register</string>
     <string name="apiUserLogin">/api/account/login</string>
 

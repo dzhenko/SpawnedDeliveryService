@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.spawneddeliveryservice.tasks.ActiveTransportTask;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -182,6 +184,7 @@ public class RegisterActivity extends Fragment implements View.OnClickListener {
         if (v.getId() == R.id.btnLogin) {
             this.mainActivity.loadLogin();
         } else if (v.getId() == R.id.btnRegister) {
+            (new ActiveTransportTask()).execute();
             this.registerUser();
         }
     }

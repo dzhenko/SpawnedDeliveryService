@@ -30,8 +30,8 @@ public class DetailsTransportDataModel {
             returnedModel.availableSpace = jObject.getInt("AvailableSpace");
             returnedModel.availableKilograms = jObject.getInt("AvailableKilograms");
             returnedModel.totalPrice = jObject.getInt("TotalPrice");
-            returnedModel.departure = Constants.formatter.parse(jObject.getString("Departure"));
-            returnedModel.arrival = Constants.formatter.parse(jObject.getString("Arrival"));
+            returnedModel.departure = ConstantsDataModels.formatter.parse(jObject.getString("Departure"));
+            returnedModel.arrival = ConstantsDataModels.formatter.parse(jObject.getString("Arrival"));
             returnedModel.driverName = jObject.getString("DriverName");
             returnedModel.driverPhone = jObject.getString("DriverPhone");
 

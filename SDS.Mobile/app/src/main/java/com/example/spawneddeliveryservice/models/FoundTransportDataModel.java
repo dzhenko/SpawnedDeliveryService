@@ -23,8 +23,8 @@ public class FoundTransportDataModel {
             returnedModel.kilograms = jObject.getInt("Kilograms");
             returnedModel.fromTown = jObject.getString("FromTown");
             returnedModel.toTown = jObject.getString("ToTown");
-            returnedModel.arrival = Constants.formatter.parse(jObject.getString("Arrival"));
-            returnedModel.departure = Constants.formatter.parse(jObject.getString("Departure"));
+            returnedModel.arrival = ConstantsDataModels.formatter.parse(jObject.getString("Arrival"));
+            returnedModel.departure = ConstantsDataModels.formatter.parse(jObject.getString("Departure"));
 
             return returnedModel;
         }

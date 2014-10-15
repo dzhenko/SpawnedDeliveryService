@@ -35,7 +35,7 @@ public class DetailsPackageDataModel {
             returnedModel.kilograms = jObject.getInt("Kilograms");
             returnedModel.fromTown = jObject.getString("FromTown");
             returnedModel.toTown = jObject.getString("ToTown");
-            returnedModel.deadline = Constants.formatter.parse(jObject.getString("Deadline"));
+            returnedModel.deadline = ConstantsDataModels.formatter.parse(jObject.getString("Deadline"));
             returnedModel.notes = jObject.getString("Notes");
             returnedModel.ownerName = jObject.getString("OwnerName");
             returnedModel.ownerPhone = jObject.getString("OwnerPhone");

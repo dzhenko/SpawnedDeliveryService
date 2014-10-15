@@ -22,7 +22,7 @@ public class DetailsTransportPackageDataModel {
             returnedModel.price = jObject.getDouble("Price");
             returnedModel.space = jObject.getInt("Space");
             returnedModel.kilograms = jObject.getInt("Kilograms");
-            returnedModel.deadline = Constants.formatter.parse(jObject.getString("Deadline"));
+            returnedModel.deadline = ConstantsDataModels.formatter.parse(jObject.getString("Deadline"));
             returnedModel.ownerName = jObject.getString("OwnerName");
             returnedModel.ownerPhone = jObject.getString("OwnerPhone");
 
