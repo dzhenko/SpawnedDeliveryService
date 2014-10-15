@@ -29,8 +29,7 @@
             return this.Ok(new
             {
                 UsersCount = this.Data.Users.All().Count(),
-                FinishedTransports = this.Data.Transports.All().Where(t => t.Arrival < DateTime.Now).Count(),
-                ActiveTransports = this.Data.Transports.All().Where(t => t.Arrival >= DateTime.Now).Count(),
+                TransportsCount = this.Data.Transports.All().Count(),
                 PackagesCount = this.Data.Packages.All().Count()
             });
         }
