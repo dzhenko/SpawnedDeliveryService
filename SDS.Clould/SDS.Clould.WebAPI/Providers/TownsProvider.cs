@@ -4,6 +4,9 @@
     {
         private static string[] allTowns = new string[]
         {
+            "Sofia",
+            "Burgas",
+            "Plovdiv",
             "Aheloy",
             "Ahtopol",
             "Aksakovo",
@@ -40,7 +43,6 @@
             "Brezovo",
             "Brusartsi",
             "Buhovo",
-            "Burgas",
             "Byala",
             "Byala Cherkva",
             "Byala Slatina",
@@ -171,7 +173,6 @@
             "Plachkovtsi",
             "Pleven",
             "Pliska",
-            "Plovdiv",
             "Polski Trambesh",
             "Pomorie",
             "Popovo",
@@ -211,7 +212,6 @@
             "Slivo Pole",
             "Smolyan",
             "Smyadovo",
-            "Sofia",
             "Sopot",
             "Sozopol",
             "Sredets",
