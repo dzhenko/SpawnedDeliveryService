@@ -15,4 +15,6 @@ public class DetailsTransportDataModel {
     public String driverName;
     public String driverNumber;
     public ArrayList<DetailsTransportPackageDataModel> packages;
+
+
 }

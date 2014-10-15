@@ -25,7 +25,7 @@
                     Arrival = t.Arrival,
                     DriverId = t.Driver.Id,
                     DriverName = t.Driver.UserName,
-                    DriverNumber = t.Driver.PhoneNumber,
+                    DriverPhone = t.Driver.PhoneNumber,
                     Packages = t.Packages.AsQueryable().Select(DetailsTransportPackageDataModel.FromData)
                 };
             }
@@ -51,7 +51,7 @@
 
         public string DriverName { get; set; }
 
-        public string DriverNumber { get; set; }
+        public string DriverPhone { get; set; }
 
         public IEnumerable<DetailsTransportPackageDataModel> Packages { get; set; }
     }
