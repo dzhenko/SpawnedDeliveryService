@@ -110,28 +110,6 @@
         {
             var allPackages = this.Data.Packages.All().Where(p => p.Deadline < DateTime.Now);
 
-            if (!string.IsNullOrEmpty(sort))
-            {
-                switch (sort)
-                {
-                    case "space":
-                        allPackages = allPackages.OrderBy(p => p.Space).ThenBy(p => p.Deadline);
-                        break;
-                    case "kilograms":
-                        allPackages = allPackages.OrderBy(p => p.Kilograms).ThenBy(p => p.Deadline);
-                        break;
-                    case "price":
-                        allPackages = allPackages.OrderBy(p => p.Price).ThenBy(p => p.Deadline);
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else
-            {
-                allPackages = allPackages.OrderByDescending(p => p.Deadline);
-            }
-
             if (!string.IsNullOrEmpty(find) && !string.IsNullOrEmpty(value))
             {
                 switch (find)
@@ -155,6 +133,28 @@
                     default:
                         break;
                 }
+            }
+            
+            if (!string.IsNullOrEmpty(sort))
+            {
+                switch (sort)
+                {
+                    case "space":
+                        allPackages = allPackages.OrderBy(p => p.Space).ThenBy(p => p.Deadline);
+                        break;
+                    case "kilograms":
+                        allPackages = allPackages.OrderBy(p => p.Kilograms).ThenBy(p => p.Deadline);
+                        break;
+                    case "price":
+                        allPackages = allPackages.OrderBy(p => p.Price).ThenBy(p => p.Deadline);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                allPackages = allPackages.OrderByDescending(p => p.Deadline);
             }
 
             allPackages = allPackages.Skip(page * ResultsPerPage).Take(ResultsPerPage);

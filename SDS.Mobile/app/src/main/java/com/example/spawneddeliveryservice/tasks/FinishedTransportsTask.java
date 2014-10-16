@@ -2,7 +2,7 @@ package com.example.spawneddeliveryservice.tasks;
 
 import android.os.AsyncTask;
 
-import com.example.spawneddeliveryservice.models.ActiveTransportDataModel;
+import com.example.spawneddeliveryservice.models.FinishedTransportDataModel;
 import com.example.spawneddeliveryservice.webData.UserData;
 
 import org.apache.http.HttpResponse;
@@ -18,11 +18,11 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-public class ActiveTransportTask extends AsyncTask<String, Void, ArrayList<ActiveTransportDataModel>> {
+public class FinishedTransportsTask extends AsyncTask<String, Void, ArrayList<FinishedTransportDataModel>> {
     @Override
-    protected ArrayList<ActiveTransportDataModel> doInBackground(String... params) {
+    protected ArrayList<FinishedTransportDataModel> doInBackground(String... params) {
         HttpClient httpClient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(ApiConstants.TRANSPORTS_ACTIVE);
+        HttpGet httpGet = new HttpGet(ApiConstants.TRANSPORTS_FINISHED);
         httpGet.addHeader("Authorization", "bearer " + UserData.getToken());
 
         try {
@@ -30,11 +30,11 @@ public class ActiveTransportTask extends AsyncTask<String, Void, ArrayList<Activ
             String response = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
             JSONArray jObject = new JSONArray(response);
 
-            ArrayList<ActiveTransportDataModel> list = new ArrayList<ActiveTransportDataModel>();
+            ArrayList<FinishedTransportDataModel> list = new ArrayList<FinishedTransportDataModel>();
 
             for(int i=0;i<jObject.length();i++)
             {
-                ActiveTransportDataModel modelToAdd = ActiveTransportDataModel.FromModel(jObject.getString(i));
+                FinishedTransportDataModel modelToAdd = FinishedTransportDataModel.FromModel(jObject.getString(i));
                 list.add(modelToAdd);
             }
 
@@ -49,6 +49,7 @@ public class ActiveTransportTask extends AsyncTask<String, Void, ArrayList<Activ
             e.printStackTrace();
         }
 
-        return null;
+        return new ArrayList<FinishedTransportDataModel>();
     }
 }
+

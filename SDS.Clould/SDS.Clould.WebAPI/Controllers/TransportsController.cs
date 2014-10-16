@@ -168,26 +168,7 @@
             var allTransports = this.Data.Transports.All().Where(t => t.Departure < DateTime.Now &&
                                                                       t.AvailableSpace - t.Packages.Sum(p=> p.Space) > 0 &&
                                                                       t.AvailableKilograms - t.Packages.Sum(p=> p.Kilograms) > 0);
-
-            if (!string.IsNullOrEmpty(sort))
-            {
-                switch (sort)
-                {
-                    case "space":
-                        allTransports = allTransports.OrderBy(t => t.AvailableSpace - t.Packages.Sum(p => p.Space)).ThenByDescending(t => t.Departure); 
-                        break;
-                    case "kilograms":
-                        allTransports = allTransports.OrderBy(t => t.AvailableKilograms - t.Packages.Sum(p => p.Kilograms)).ThenByDescending(t => t.Departure); 
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else
-            {
-                allTransports = allTransports.OrderByDescending(t => t.Departure); 
-            }
-
+            
             if (!string.IsNullOrEmpty(find) && !string.IsNullOrEmpty(value))
             {
                 switch (find)
@@ -207,6 +188,25 @@
                     default:
                         break;
                 }
+            }
+
+            if (!string.IsNullOrEmpty(sort))
+            {
+                switch (sort)
+                {
+                    case "space":
+                        allTransports = allTransports.OrderBy(t => t.AvailableSpace - t.Packages.Sum(p => p.Space)).ThenByDescending(t => t.Departure);
+                        break;
+                    case "kilograms":
+                        allTransports = allTransports.OrderBy(t => t.AvailableKilograms - t.Packages.Sum(p => p.Kilograms)).ThenByDescending(t => t.Departure);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                allTransports = allTransports.OrderByDescending(t => t.Departure);
             }
 
             allTransports = allTransports.Skip(page * ResultsPerPage).Take(ResultsPerPage);
