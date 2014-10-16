@@ -1,5 +1,6 @@
 package com.example.spawneddeliveryservice.tasks;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.spawneddeliveryservice.models.CoordinatesDataModel;
@@ -16,6 +17,11 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 public class CoordinatesTask extends AsyncTask<String, Void, CoordinatesDataModel> {
+    private Context mContext;
+
+    public CoordinatesTask(Context context){
+        this.mContext = context;
+    }
     @Override                                   // pass id of the package
     protected CoordinatesDataModel doInBackground(String... params) {
         HttpClient httpClient = new DefaultHttpClient();
@@ -35,5 +41,12 @@ public class CoordinatesTask extends AsyncTask<String, Void, CoordinatesDataMode
         }
 
         return new CoordinatesDataModel();
+    }
+
+    @Override
+    protected void onPostExecute(CoordinatesDataModel result) {
+        super.onPostExecute(result);
+
+
     }
 }

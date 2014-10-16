@@ -1,5 +1,6 @@
 package com.example.spawneddeliveryservice.tasks;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.spawneddeliveryservice.models.FinishedTransportDataModel;
@@ -19,6 +20,12 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class FinishedTransportsTask extends AsyncTask<String, Void, ArrayList<FinishedTransportDataModel>> {
+    private Context mContext;
+
+    public FinishedTransportsTask(Context context){
+        this.mContext = context;
+    }
+
     @Override
     protected ArrayList<FinishedTransportDataModel> doInBackground(String... params) {
         HttpClient httpClient = new DefaultHttpClient();
@@ -50,6 +57,13 @@ public class FinishedTransportsTask extends AsyncTask<String, Void, ArrayList<Fi
         }
 
         return new ArrayList<FinishedTransportDataModel>();
+    }
+
+    @Override
+    protected void onPostExecute(ArrayList<FinishedTransportDataModel> result) {
+        super.onPostExecute(result);
+
+
     }
 }
 

@@ -52,7 +52,16 @@ public class DbStatsPopulationTask extends AsyncTask<String, Void, Stats> {
             if (lastStats != null) {
                 mStatsDb.deleteStats(lastStats);
             }
-            mStatsDb.createStats(jObject.getInt("UsersCount"), jObject.getInt("TransportsCount"), jObject.getInt("PackagesCount"));
+            int usersCount = jObject.getInt("UsersCount");
+            int transportsCount = jObject.getInt("TransportsCount");
+            int packagesCount = jObject.getInt("PackagesCount");
+            mStatsDb.createStats(usersCount, transportsCount, packagesCount);
+            Stats statsToReturn = new Stats();
+            statsToReturn.setUsers(usersCount);
+            statsToReturn.setTransports(transportsCount);
+            statsToReturn.setPackages(packagesCount);
+
+            return statsToReturn;
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {
