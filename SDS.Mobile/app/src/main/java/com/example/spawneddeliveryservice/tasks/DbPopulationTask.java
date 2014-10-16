@@ -3,7 +3,6 @@ package com.example.spawneddeliveryservice.tasks;
 import android.os.AsyncTask;
 
 import com.example.spawneddeliveryservice.models.ActiveTransportDataModel;
-import com.example.spawneddeliveryservice.webData.UserData;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -18,17 +17,16 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-public class ActiveTransportTask extends AsyncTask<String, Void, ArrayList<ActiveTransportDataModel>> {
+public class DbPopulationTask extends AsyncTask<String, Void, ArrayList<ActiveTransportDataModel>> {
     @Override
     protected ArrayList<ActiveTransportDataModel> doInBackground(String... params) {
         HttpClient httpClient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet("http://spawndeliveryservice.apphb.com" + "/api/transports/" + "active");
-        httpGet.addHeader("Authorization", "bearer " + UserData.getToken());
+        HttpGet httpGet = new HttpGet("http://spawndeliveryservice.apphb.com" + "/api/stats/" + "active");
 
         try {
             HttpResponse httpResponse = httpClient.execute(httpGet);
-            String response = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
-            JSONArray jObject = new JSONArray(response);
+            String body = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+            JSONArray jObject = new JSONArray(body);
 
             ArrayList<ActiveTransportDataModel> list = new ArrayList<ActiveTransportDataModel>();
 

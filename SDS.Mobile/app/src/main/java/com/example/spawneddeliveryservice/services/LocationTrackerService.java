@@ -63,7 +63,7 @@ public class LocationTrackerService extends Service {
             try {
                 String latitude = Double.toString(location.getLatitude());
                 String longitude = Double.toString(location.getLongitude());
-                (new LocationChangeTask(locationTrackerService)).execute(latitude, longitude);
+                (new LocationChangeTask()).execute(latitude, longitude);
             }catch (Exception ex){
                 ex.printStackTrace();
             }
