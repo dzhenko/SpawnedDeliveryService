@@ -25,6 +25,8 @@ public class MainActivity extends Activity {
         if (savedInstanceState == null) {
             this.loadLogin();
         }
+
+        this.redirectHome();
     }
 
     @Override
@@ -53,11 +55,11 @@ public class MainActivity extends Activity {
     }
 
     public void loadLogin(){
-        changeActivity(new LoginActivity());
+        changeActivity(new LoginFragment());
     }
 
     public void loadRegister(){
-        changeActivity(new RegisterActivity());
+        changeActivity(new RegisterFragment());
     }
 
     public void redirectHome(){

@@ -2,7 +2,7 @@ package com.example.spawneddeliveryservice.models;
 
 import java.util.Date;
 
-public class Stats {
+public class Stats{
     private long id;
     private int users;
     private int packages;
@@ -51,6 +51,6 @@ public class Stats {
 
     @Override
     public String toString() {
-        return "Users: " + this.users + ", Packages: " + this.packages+ ", Transports: " + this.transports;
+        return "Home of " + this.getUsers() + " Users, " + this.getPackages()+ " Packages, " + this.getTransports() + " Transports";
     }
 }

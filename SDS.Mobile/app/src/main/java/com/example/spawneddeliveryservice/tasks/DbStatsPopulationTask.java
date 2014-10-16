@@ -38,7 +38,7 @@ public class DbStatsPopulationTask extends AsyncTask<String, Void, Stats> {
         if (!lastStatsList.isEmpty()) {
             lastStats = lastStatsList.get(0);
             if (lastStats.getUpdated().getTime() - (new Date()).getTime() < 1000 * 60 * 60 * 24) {
-                return null;
+//                return null;
             }
         }
 

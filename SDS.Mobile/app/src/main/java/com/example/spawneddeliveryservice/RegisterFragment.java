@@ -11,16 +11,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.spawneddeliveryservice.tasks.ActiveTransportTask;
+import com.example.spawneddeliveryservice.tasks.ActiveTransportsTask;
 import com.example.spawneddeliveryservice.tasks.RegisterTask;
 
-public class RegisterActivity extends Fragment implements View.OnClickListener {
+public class RegisterFragment extends Fragment implements View.OnClickListener {
     static EditText email, password, confirmPassword, phoneNumber;
     static Button btnLogin, btnRegister;
     Context context;
     MainActivity mainActivity;
 
-    public RegisterActivity() {
+    public RegisterFragment() {
     }
 
     @Override
@@ -92,7 +92,7 @@ public class RegisterActivity extends Fragment implements View.OnClickListener {
         if (v.getId() == R.id.btnLogin) {
             this.mainActivity.loadLogin();
         } else if (v.getId() == R.id.btnRegister) {
-            (new ActiveTransportTask()).execute();
+            (new ActiveTransportsTask()).execute();
             this.registerUser();
         }
     }

@@ -12,13 +12,13 @@ import android.widget.Toast;
 
 import com.example.spawneddeliveryservice.tasks.LoginTask;
 
-public class LoginActivity extends Fragment implements View.OnClickListener {
+public class LoginFragment extends Fragment implements View.OnClickListener {
     static EditText email, password, confirmPassword, phoneNumber;
     static Button btnLogin, btnRegister;
     Context context;
     MainActivity mainActivity;
 
-    public LoginActivity() {
+    public LoginFragment() {
     }
 
     @Override
