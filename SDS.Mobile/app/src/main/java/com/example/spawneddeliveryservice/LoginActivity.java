@@ -131,7 +131,7 @@ public class LoginActivity extends Fragment implements View.OnClickListener {
                             context,
                             "Hello, " + data.getUsername(),
                             Toast.LENGTH_SHORT).show();
-                    mainActivity.loadRegister();
+                    mainActivity.redirectHome();
                 } catch (JSONException e) {
                     String errorDescription = jObject.getString("error_description");
                     Toast.makeText(

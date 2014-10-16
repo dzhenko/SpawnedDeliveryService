@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   
+
     <string name="app_name">SpawnedDeliveryService</string>
+    <string name="title_activity_locator">Location Tracker</string>
     <string name="tvMainWelcomeMessage">Welcome to SDS</string>
+
     <string name="btnMainLogin">Login</string>
     <string name="action_settings">Settings</string>
     <string name="btnMainRegister">Register</string>
@@ -10,6 +12,12 @@
     <string name="tvMainLabelPassword">Password</string>
     <string name="tvMainLabelConfirmPassword">Confim password</string>
     <string name="tvMainLabelPhoneNumber">Phone number</string>
+    <string name="btnHomeActivePackages">Active packages</string>
+    <string name="btnHomeActiveTransport">Active transports</string>
+    <string name="btnHomeDeliveredPackages">Delivered packages</string>
+    <string name="btnHomeFinishedTransports">Finished transports</string>
+    <string name="btnHomeLocationTracker">Location tracker</string>
+    <string name="swLocatorToggleLocation">Toggle Tracker</string>
 
     <string name="apiBaseUrl">http://spawndeliveryservice.apphb.com</string>
     <string name="apiTransports">/api/transports/</string>
@@ -18,5 +26,6 @@
     <string name="apiUsers">/api/users/</string>
     <string name="apiUserRegistration">/api/account/register</string>
     <string name="apiUserLogin">/api/account/login</string>
+    <string name="apiUserCoordinates">/api/users/Coordinates</string>
 
 </resources>

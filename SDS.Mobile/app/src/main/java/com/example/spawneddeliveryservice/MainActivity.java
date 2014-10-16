@@ -3,6 +3,7 @@ package com.example.spawneddeliveryservice;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,5 +51,10 @@ public class MainActivity extends Activity {
 
     public void loadRegister(){
         changeActivity(new RegisterActivity());
+    }
+
+    public void redirectHome(){
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 }
