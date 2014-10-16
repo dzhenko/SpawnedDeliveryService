@@ -25,8 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegisterTask extends AsyncTask<String, Void, String> {
-    private String email, password, confirmPassword, phoneNumber;
-
     private Context mContext;
 
     public RegisterTask(Context context){
@@ -35,10 +33,11 @@ public class RegisterTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        this.email = params[0];
-        this.password = params[1];
-        this.confirmPassword = params[2];
-        this.phoneNumber = params[3];
+        String email = params[0];
+        String password = params[1];
+        String confirmPassword = params[2];
+        String phoneNumber = params[3];
+
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(ApiConstants.REGISTER);
         httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded");
