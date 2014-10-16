@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.spawneddeliveryservice.mainFragments.LoginFragment;
+import com.example.spawneddeliveryservice.mainFragments.RegisterFragment;
 import com.example.spawneddeliveryservice.tasks.DbStatsPopulationTask;
 import com.example.spawneddeliveryservice.tasks.DbTownsPopulationTask;
 
