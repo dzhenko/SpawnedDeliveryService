@@ -28,9 +28,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_CREATE_STATS = "create table "
             + TABLE_STATS + "(" + COLUMN_STATS_ID + " integer primary key autoincrement, " +
-                                  COLUMN_STATS_USERS + " text not null, " +
-                                  COLUMN_STATS_PACKAGES + " text not null, " +
-                                  COLUMN_STATS_TRANSPORTS + " text not null, " +
+                                  COLUMN_STATS_USERS + " integer not null, " +
+                                  COLUMN_STATS_PACKAGES + " integer not null, " +
+                                  COLUMN_STATS_TRANSPORTS + " integer not null, " +
                                   COLUMN_STATS_UPDATED  + " date not null);";
 
     public SQLiteHelper(Context context) {

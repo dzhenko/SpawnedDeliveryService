@@ -26,19 +26,19 @@ public class Stats{
     }
 
     public int getPackages() {
-        return users;
+        return packages;
     }
 
     public void setPackages(int packages) {
-        this.packages = users;
+        this.packages = packages;
     }
 
     public int getTransports() {
-        return users;
+        return transports;
     }
 
     public void setTransports(int transports) {
-        this.transports = users;
+        this.transports = transports;
     }
 
     public Date getUpdated(){
