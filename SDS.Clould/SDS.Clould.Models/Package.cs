@@ -38,5 +38,7 @@
 
         [ForeignKey("UserId")]
         public virtual User Owner { get; set; }
+
+        public string AdditionalContact { get; set; }
     }
 }

@@ -12,6 +12,7 @@ public class DetailsTransportPackageDataModel {
     public Date deadline;
     public String ownerName;
     public String ownerPhone;
+    public String additionalContact;
 
     public static DetailsTransportPackageDataModel FromModel(String json){
         try {
@@ -25,6 +26,7 @@ public class DetailsTransportPackageDataModel {
             returnedModel.deadline = ConstantsDataModels.getDateFormatter().parse(jObject.getString("Deadline"));
             returnedModel.ownerName = jObject.getString("OwnerName");
             returnedModel.ownerPhone = jObject.getString("OwnerPhone");
+            returnedModel.additionalContact = jObject.getString("AdditionalContact");
 
             return returnedModel;
         }

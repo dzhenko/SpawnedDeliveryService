@@ -37,14 +37,15 @@ public class CreatePackageTask extends AsyncTask<NewPackageDataModel, Void, Stri
 
         NewPackageDataModel model = models[0];
         List<NameValuePair> registrationData = new ArrayList<NameValuePair>();
-        registrationData.add(new BasicNameValuePair("Picture", model.Picture));
-        registrationData.add(new BasicNameValuePair("Price", Double.toString(model.Price)));
-        registrationData.add(new BasicNameValuePair("Space", Integer.toString(model.Space)));
-        registrationData.add(new BasicNameValuePair("Kilograms", Integer.toString(model.Kilograms)));
-        registrationData.add(new BasicNameValuePair("FromTown", model.FromTown));
-        registrationData.add(new BasicNameValuePair("ToTown", model.ToTown));
-        registrationData.add(new BasicNameValuePair("Deadline", model.Deadline));
-        registrationData.add(new BasicNameValuePair("Notes", model.Notes));
+        registrationData.add(new BasicNameValuePair("Picture", model.picture));
+        registrationData.add(new BasicNameValuePair("Price", Double.toString(model.price)));
+        registrationData.add(new BasicNameValuePair("Space", Integer.toString(model.space)));
+        registrationData.add(new BasicNameValuePair("Kilograms", Integer.toString(model.kilograms)));
+        registrationData.add(new BasicNameValuePair("FromTown", model.fromTown));
+        registrationData.add(new BasicNameValuePair("ToTown", model.toTown));
+        registrationData.add(new BasicNameValuePair("Deadline", model.deadline));
+        registrationData.add(new BasicNameValuePair("Notes", model.notes));
+        registrationData.add(new BasicNameValuePair("AdditionalContact", model.additionalContact));
 
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(registrationData));

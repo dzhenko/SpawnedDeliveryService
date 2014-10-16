@@ -154,7 +154,7 @@
         /// Transports that are compleated
         /// </summary>
         [HttpGet]
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Details(int id)
         {
             return this.Ok(this.Data.Transports.All().Where(t => t.Id == id).Select(DetailsTransportDataModel.FromData));
         }

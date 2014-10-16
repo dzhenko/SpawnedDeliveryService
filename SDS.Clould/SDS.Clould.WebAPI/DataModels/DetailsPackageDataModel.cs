@@ -25,7 +25,8 @@
                     Deadline = p.Deadline,
                     Notes = p.Notes,
                     OwnerName = p.Owner.UserName,
-                    OwnerPhone = p.Owner.PhoneNumber
+                    OwnerPhone = p.Owner.PhoneNumber,
+                    AdditionalContact = p.AdditionalContact
                 };
             }
         }
@@ -54,5 +55,7 @@
         public string OwnerName { get; set; }
 
         public string OwnerPhone { get; set; }
+
+        public string AdditionalContact { get; set; }
     }
 }

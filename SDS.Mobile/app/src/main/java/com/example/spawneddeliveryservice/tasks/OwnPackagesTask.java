@@ -3,7 +3,7 @@ package com.example.spawneddeliveryservice.tasks;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.example.spawneddeliveryservice.models.FoundPackageDataModel;
+import com.example.spawneddeliveryservice.models.OwnPackageDataModel;
 import com.example.spawneddeliveryservice.webData.UserData;
 
 import org.apache.http.HttpResponse;
@@ -19,25 +19,17 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-public class FoundPackagesTask extends AsyncTask<String, Void, ArrayList<FoundPackageDataModel>> {
+public class OwnPackagesTask extends AsyncTask<String, Void, ArrayList<OwnPackageDataModel>> {
     private Context mContext;
 
-    public FoundPackagesTask(Context context){
+    public OwnPackagesTask(Context context){
         this.mContext = context;
     }
 
-    @Override                               //page = 0, sort = price, find = towns, value = Sofia-Burgas
-    protected ArrayList<FoundPackageDataModel> doInBackground(String... params) {
+    @Override
+    protected ArrayList<OwnPackageDataModel> doInBackground(String... params) {
         HttpClient httpClient = new DefaultHttpClient();
-
-        String url = ApiConstants.PACKAGES_FIND + "?";
-        url+="page="+params[0];
-        url+="sort="+params[1];
-        url+="find="+params[2];
-        url+="value="+params[3];
-
-        HttpGet httpGet = new HttpGet(url);
-
+        HttpGet httpGet = new HttpGet(ApiConstants.PACKAGES_OWN);
         httpGet.addHeader("Authorization", "bearer " + UserData.getToken());
 
         try {
@@ -45,11 +37,11 @@ public class FoundPackagesTask extends AsyncTask<String, Void, ArrayList<FoundPa
             String response = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
             JSONArray jObject = new JSONArray(response);
 
-            ArrayList<FoundPackageDataModel> list = new ArrayList<FoundPackageDataModel>();
+            ArrayList<OwnPackageDataModel> list = new ArrayList<OwnPackageDataModel>();
 
             for(int i=0;i<jObject.length();i++)
             {
-                FoundPackageDataModel modelToAdd = FoundPackageDataModel.FromModel(jObject.getString(i));
+                OwnPackageDataModel modelToAdd = OwnPackageDataModel.FromModel(jObject.getString(i));
                 list.add(modelToAdd);
             }
 
@@ -64,13 +56,14 @@ public class FoundPackagesTask extends AsyncTask<String, Void, ArrayList<FoundPa
             e.printStackTrace();
         }
 
-        return new ArrayList<FoundPackageDataModel>();
+        return new ArrayList<OwnPackageDataModel>();
     }
 
     @Override
-    protected void onPostExecute(ArrayList<FoundPackageDataModel> result) {
+    protected void onPostExecute(ArrayList<OwnPackageDataModel> result) {
         super.onPostExecute(result);
 
-        
+
     }
 }
+

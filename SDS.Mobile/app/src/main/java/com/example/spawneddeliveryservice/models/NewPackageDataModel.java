@@ -1,23 +1,26 @@
 package com.example.spawneddeliveryservice.models;
 
 public class NewPackageDataModel {
-    public String Picture;
-    public double Price;
-    public int Space;
-    public int Kilograms;
-    public String FromTown;
-    public String ToTown;
-    public String Deadline;//2015-03-17 format
-    public String Notes;
+    public String picture;
+    public double price;
+    public int space;
+    public int kilograms;
+    public String fromTown;
+    public String toTown;
+    public String deadline;//2015-03-17 format
+    public String notes;
+    public String additionalContact;
 
-    public NewPackageDataModel(String base64Picture, double price, int space, int kilograms, String fromTown, String toTown, String deadline, String notes) {
-        this.Picture  = base64Picture;
-        this.Price = price;
-        this.Space = space;
-        this.Kilograms = kilograms;
-        this.FromTown = fromTown;
-        this.ToTown = toTown;
-        this.Deadline = deadline;
-        this.Notes = notes;
+    public NewPackageDataModel(String base64Picture, double price, int space, int kilograms,
+                               String fromTown, String toTown, String deadline, String notes, String additionalContact) {
+        this.picture = base64Picture;
+        this.price = price;
+        this.space = space;
+        this.kilograms = kilograms;
+        this.fromTown = fromTown;
+        this.toTown = toTown;
+        this.deadline = deadline;
+        this.notes = notes;
+        this.additionalContact = additionalContact;
     }
 }

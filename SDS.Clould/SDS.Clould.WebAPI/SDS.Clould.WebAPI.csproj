@@ -228,6 +228,7 @@
     <Compile Include="DataModels\FoundPackageDataModel.cs" />
     <Compile Include="DataModels\NewPackageDataModel.cs" />
     <Compile Include="DataModels\NewTransportDataModel.cs" />
+    <Compile Include="DataModels\OwnPackagesDataModel.cs" />
     <Compile Include="DataModels\PendingTransportDataModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

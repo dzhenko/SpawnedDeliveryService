@@ -18,6 +18,7 @@ public class DetailsPackageDataModel {
     public String notes;
     public String ownerName;
     public String ownerPhone;
+    public String additionalContact;
 
     public static DetailsPackageDataModel FromModel(String json){
         try {
@@ -39,6 +40,7 @@ public class DetailsPackageDataModel {
             returnedModel.notes = jObject.getString("Notes");
             returnedModel.ownerName = jObject.getString("OwnerName");
             returnedModel.ownerPhone = jObject.getString("OwnerPhone");
+            returnedModel.additionalContact = jObject.getString("AdditionalContact");
 
             return returnedModel;
         }

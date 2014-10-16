@@ -37,6 +37,8 @@
         [ForeignKey("UserId")]
         public virtual User Driver { get; set; }
 
+        public string AdditionalContact { get; set; }
+
         public virtual ICollection<Package> Packages
         {
             get

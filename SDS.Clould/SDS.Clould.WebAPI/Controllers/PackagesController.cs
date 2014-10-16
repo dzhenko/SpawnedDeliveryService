@@ -97,9 +97,20 @@
         }
 
         [HttpGet]
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Details(int id)
         {
             return this.Ok(this.Data.Packages.All().Where(t => t.Id == id).Select(DetailsPackageDataModel.FromData));
+        }
+
+
+        /// <summary>
+        /// Transports that are compleated
+        /// </summary>
+        [HttpGet]
+        public IHttpActionResult Own()
+        {
+            var id = User.Identity.GetUserId();
+            return this.Ok(this.Data.Packages.All().Where(p => p.Id == id && p.Deadline >= DateTime.Now).Select(OwnPackagesDataModel.FromData));
         }
 
         /// <summary>

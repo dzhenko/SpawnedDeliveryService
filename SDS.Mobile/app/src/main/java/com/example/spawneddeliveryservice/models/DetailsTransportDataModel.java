@@ -17,6 +17,7 @@ public class DetailsTransportDataModel {
     public Date arrival;
     public String driverName;
     public String driverPhone;
+    public String additionalContact;
     public ArrayList<DetailsTransportPackageDataModel> packages;
 
     public static DetailsTransportDataModel FromModel(String json){
@@ -34,6 +35,7 @@ public class DetailsTransportDataModel {
             returnedModel.arrival = ConstantsDataModels.getDateFormatter().parse(jObject.getString("Arrival"));
             returnedModel.driverName = jObject.getString("DriverName");
             returnedModel.driverPhone = jObject.getString("DriverPhone");
+            returnedModel.additionalContact = jObject.getString("AdditionalContact");
 
             JSONArray jsonArrayPackages = jObject.getJSONArray("Packages");
 

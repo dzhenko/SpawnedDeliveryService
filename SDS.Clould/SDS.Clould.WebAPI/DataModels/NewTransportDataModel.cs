@@ -1,10 +1,11 @@
 ﻿namespace SDS.Clould.WebAPI.DataModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+
     using SDS.Clould.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
     public class NewTransportDataModel
     {
@@ -18,7 +19,8 @@ using System.Linq;
                  Departure = model.Departure,
                  FromTown = model.FromTown,
                  ToTown = model.ToTown,
-                 UserId = driverId
+                 UserId = driverId,
+                 AdditionalContact = model.AdditionalContact
             };
         }
 
@@ -39,5 +41,8 @@ using System.Linq;
         public string DriverName { get; set; }
 
         public string DriverPhone { get; set; }
+
+        [Required]
+        public string AdditionalContact { get; set; }
     }
 }

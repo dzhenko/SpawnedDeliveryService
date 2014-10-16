@@ -22,7 +22,8 @@
                 Space = model.Space,
                 ToTown = model.ToTown,
                 UserId = ownerId,
-                PictureURL = pictureUrl
+                PictureURL = pictureUrl,
+                AdditionalContact = model.AdditionalContact
             };
         }
 
@@ -45,5 +46,8 @@
         public DateTime Deadline { get; set; }
 
         public string Notes { get; set; }
+
+        [Required]
+        public string AdditionalContact { get; set; }
     }
 }

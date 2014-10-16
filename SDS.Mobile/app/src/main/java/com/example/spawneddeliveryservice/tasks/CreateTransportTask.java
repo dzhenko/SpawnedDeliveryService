@@ -37,14 +37,15 @@ public class CreateTransportTask extends AsyncTask<NewTransportDataModel, Void, 
 
         NewTransportDataModel model = models[0];
         List<NameValuePair> registrationData = new ArrayList<NameValuePair>();
-        registrationData.add(new BasicNameValuePair("FromTown", model.FromTown));
-        registrationData.add(new BasicNameValuePair("ToTown", model.ToTown));
-        registrationData.add(new BasicNameValuePair("AvailableSpace", Integer.toString(model.AvailableSpace)));
-        registrationData.add(new BasicNameValuePair("AvailableKilograms", Integer.toString(model.AvailableKilograms)));
-        registrationData.add(new BasicNameValuePair("Arrival", model.Arrival));
-        registrationData.add(new BasicNameValuePair("Departure", model.Departure));
-        registrationData.add(new BasicNameValuePair("DriverName", model.DriverName));
-        registrationData.add(new BasicNameValuePair("DriverPhone", model.DriverPhone));
+        registrationData.add(new BasicNameValuePair("FromTown", model.fromTown));
+        registrationData.add(new BasicNameValuePair("ToTown", model.toTown));
+        registrationData.add(new BasicNameValuePair("AvailableSpace", Integer.toString(model.availableSpace)));
+        registrationData.add(new BasicNameValuePair("AvailableKilograms", Integer.toString(model.availableKilograms)));
+        registrationData.add(new BasicNameValuePair("Arrival", model.arrival));
+        registrationData.add(new BasicNameValuePair("Departure", model.departure));
+        registrationData.add(new BasicNameValuePair("DriverName", model.driverName));
+        registrationData.add(new BasicNameValuePair("DriverPhone", model.driverPhone));
+        registrationData.add(new BasicNameValuePair("AdditionalContact", model.additionalContact));
 
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(registrationData));

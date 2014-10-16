@@ -26,7 +26,8 @@
                     DriverId = t.Driver.Id,
                     DriverName = t.Driver.UserName,
                     DriverPhone = t.Driver.PhoneNumber,
-                    Packages = t.Packages.AsQueryable().Select(DetailsTransportPackageDataModel.FromData)
+                    Packages = t.Packages.AsQueryable().Select(DetailsTransportPackageDataModel.FromData),
+                    AdditionalContact = t.AdditionalContact
                 };
             }
         }
@@ -54,5 +55,7 @@
         public string DriverPhone { get; set; }
 
         public IEnumerable<DetailsTransportPackageDataModel> Packages { get; set; }
+
+        public string AdditionalContact { get; set; }
     }
 }
