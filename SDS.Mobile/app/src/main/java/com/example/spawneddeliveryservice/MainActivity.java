@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
             this.loadLogin();
         }
 
-        //this.redirectHome();
+//        this.redirectHome();
     }
 
     @Override

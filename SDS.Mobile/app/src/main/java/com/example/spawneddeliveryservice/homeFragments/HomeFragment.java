@@ -31,6 +31,6 @@ public class HomeFragment extends Fragment {
     }
 
     public void updatePageInfo() {
-        this.tvHomeInformation.setText("aaaaaaaaaaaaaaaaaaaaaaaaaaaa"+this.mStatsOverview);
+        this.tvHomeInformation.setText(this.mStatsOverview);
     }
 }

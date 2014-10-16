@@ -1,8 +1,8 @@
 package com.example.spawneddeliveryservice.tasks;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
+import com.example.spawneddeliveryservice.homeFragments.FinishedPackagesFragment;
 import com.example.spawneddeliveryservice.models.FinishedPackageDataModel;
 import com.example.spawneddeliveryservice.webData.UserData;
 
@@ -20,10 +20,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class FinishedPackagesTask extends AsyncTask<String, Void, ArrayList<FinishedPackageDataModel>> {
-    private Context mContext;
+    private FinishedPackagesFragment mFragment;
 
-    public FinishedPackagesTask(Context context){
-        this.mContext = context;
+    public FinishedPackagesTask(FinishedPackagesFragment fragment) {
+        this.mFragment = fragment;
     }
 
     @Override
@@ -39,8 +39,7 @@ public class FinishedPackagesTask extends AsyncTask<String, Void, ArrayList<Fini
 
             ArrayList<FinishedPackageDataModel> list = new ArrayList<FinishedPackageDataModel>();
 
-            for(int i=0;i<jObject.length();i++)
-            {
+            for (int i = 0; i < jObject.length(); i++) {
                 FinishedPackageDataModel modelToAdd = FinishedPackageDataModel.FromModel(jObject.getString(i));
                 list.add(modelToAdd);
             }
@@ -63,6 +62,6 @@ public class FinishedPackagesTask extends AsyncTask<String, Void, ArrayList<Fini
     protected void onPostExecute(ArrayList<FinishedPackageDataModel> result) {
         super.onPostExecute(result);
 
-
+        this.mFragment.updatePageInfo(result);
     }
 }

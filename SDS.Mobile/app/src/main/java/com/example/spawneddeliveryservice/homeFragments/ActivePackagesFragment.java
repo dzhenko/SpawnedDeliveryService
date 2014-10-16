@@ -8,19 +8,15 @@ import android.view.ViewGroup;
 
 import com.example.spawneddeliveryservice.R;
 
-public class PackagesFragment extends Fragment {
+public class ActivePackagesFragment extends Fragment {
+
+    public ActivePackagesFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
-        this.updatePageInfo();
-
+        View rootView = inflater.inflate(R.layout.fragment_packages_active_packages, container, false);
         return rootView;
-    }
-
-    public void updatePageInfo() {
-
     }
 }
