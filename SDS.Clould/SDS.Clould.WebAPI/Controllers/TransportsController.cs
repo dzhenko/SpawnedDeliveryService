@@ -59,7 +59,7 @@
             var user = this.Data.Users.Find(User.Identity.GetUserId());
 
             return this.Ok(this.Data.Transports.All()
-                .Where(t => t.Packages.Any(p => p.Owner.Id == user.Id) && t.Arrival < DateTime.Now)
+                .Where(t => t.Packages.Any(p => p.Owner.Id == user.Id) && t.Arrival > DateTime.Now)
                 .Select(ActiveTransportDataModel.FromData));
         }
 
@@ -72,7 +72,7 @@
             var user = this.Data.Users.Find(User.Identity.GetUserId());
 
             return this.Ok(this.Data.Transports.All()
-                .Where(t => t.Driver.Id == user.Id && t.Arrival < DateTime.Now)
+                .Where(t => t.Driver.Id == user.Id && t.Arrival > DateTime.Now)
                 .Select(PendingTransportDataModel.FromData));
         }
 

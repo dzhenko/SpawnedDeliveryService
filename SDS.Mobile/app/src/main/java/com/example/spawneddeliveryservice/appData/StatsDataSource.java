@@ -80,7 +80,7 @@ public class StatsDataSource {
         stats.setPackages(cursor.getInt(2));
         stats.setTransports(cursor.getInt(3));
         try {
-            stats.setUpdated(ConstantsDataModels.formatter.parse(cursor.getString(4)));
+            stats.setUpdated(ConstantsDataModels.getDateFormatter().parse(cursor.getString(4)));
         } catch (ParseException e) {
             e.printStackTrace();
             stats.setUpdated(new Date());

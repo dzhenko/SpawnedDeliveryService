@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.spawneddeliveryservice.tasks.ActiveTransportTask;
+
 public class MainActivity extends Activity {
     private final Context context = this;
 
@@ -15,6 +17,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        (new ActiveTransportTask()).execute("");
         if (savedInstanceState == null) {
             this.loadLogin();
         }
