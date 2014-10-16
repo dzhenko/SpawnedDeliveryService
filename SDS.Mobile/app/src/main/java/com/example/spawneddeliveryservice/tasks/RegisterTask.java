@@ -27,10 +27,10 @@ import java.util.List;
 public class RegisterTask extends AsyncTask<String, Void, String> {
     private String email, password, confirmPassword, phoneNumber;
 
-    private Context context;
+    private Context mContext;
 
     public RegisterTask(Context context){
-        this.context = context;
+        this.mContext = context;
     }
 
     @Override
@@ -70,21 +70,21 @@ public class RegisterTask extends AsyncTask<String, Void, String> {
 
         if (result.equals("")) {
             Toast.makeText(
-                    context,
+                    mContext,
                     "Registration successful",
                     Toast.LENGTH_SHORT).show();
-            context.startActivity(new Intent(context, MainActivity.class));
+            mContext.startActivity(new Intent(mContext, MainActivity.class));
         } else {
             try {
                 JSONObject jObject = new JSONObject(result);
                 String errorsAsString = jObject.getString("Message");
                 Toast.makeText(
-                        context,
+                        mContext,
                         errorsAsString,
                         Toast.LENGTH_SHORT).show();
             } catch (JSONException e) {
                 Toast.makeText(
-                        context,
+                        mContext,
                         "Incorrect registration data",
                         Toast.LENGTH_SHORT).show();
             }

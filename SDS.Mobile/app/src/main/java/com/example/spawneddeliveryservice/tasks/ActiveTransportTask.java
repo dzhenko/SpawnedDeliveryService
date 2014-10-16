@@ -22,7 +22,7 @@ public class ActiveTransportTask extends AsyncTask<String, Void, ArrayList<Activ
     @Override
     protected ArrayList<ActiveTransportDataModel> doInBackground(String... params) {
         HttpClient httpClient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet("http://spawndeliveryservice.apphb.com" + "/api/transports/" + "active");
+        HttpGet httpGet = new HttpGet(ApiConstants.TRANSPORTS_ACTIVE);
         httpGet.addHeader("Authorization", "bearer " + UserData.getToken());
 
         try {

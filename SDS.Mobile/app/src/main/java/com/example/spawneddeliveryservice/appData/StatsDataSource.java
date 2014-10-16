@@ -15,22 +15,22 @@ import java.util.Date;
 import java.util.List;
 
 public class StatsDataSource {
-    private SQLiteDatabase database;
-    private SQLiteHelper dbHelper;
-    private String[] allColumns = { SQLiteHelper.COLUMN_STATS_ID,
+    private SQLiteDatabase mDatabase;
+    private SQLiteHelper mDbHelper;
+    private String[] mAllColumns = { SQLiteHelper.COLUMN_STATS_ID,
             SQLiteHelper.COLUMN_STATS_USERS, SQLiteHelper.COLUMN_STATS_PACKAGES,
             SQLiteHelper.COLUMN_STATS_TRANSPORTS, SQLiteHelper.COLUMN_STATS_UPDATED };
 
     public StatsDataSource(Context context) {
-        dbHelper = new SQLiteHelper(context);
+        mDbHelper = new SQLiteHelper(context);
     }
 
     public void open() throws SQLException {
-        database = dbHelper.getWritableDatabase();
+        mDatabase = mDbHelper.getWritableDatabase();
     }
 
     public void close() {
-        dbHelper.close();
+        mDbHelper.close();
     }
 
     public Stats createStats(int users, int packages, int transports) {
@@ -39,10 +39,10 @@ public class StatsDataSource {
         values.put(SQLiteHelper.COLUMN_STATS_PACKAGES, packages);
         values.put(SQLiteHelper.COLUMN_STATS_TRANSPORTS, transports);
         values.put(SQLiteHelper.COLUMN_STATS_UPDATED, (new Date()).toString());
-        long insertId = database.insert(SQLiteHelper.TABLE_STATS, null,
+        long insertId = mDatabase.insert(SQLiteHelper.TABLE_STATS, null,
                 values);
-        Cursor cursor = database.query(SQLiteHelper.TABLE_STATS,
-                allColumns, SQLiteHelper.COLUMN_STATS_ID + " = " + insertId, null,
+        Cursor cursor = mDatabase.query(SQLiteHelper.TABLE_STATS,
+                mAllColumns, SQLiteHelper.COLUMN_STATS_ID + " = " + insertId, null,
                 null, null, null);
         cursor.moveToFirst();
         Stats newStats = cursorToStats(cursor);
@@ -52,15 +52,15 @@ public class StatsDataSource {
 
     public void deleteStats(Stats stats) {
         long id = stats.getId();
-        database.delete(SQLiteHelper.TABLE_STATS, SQLiteHelper.COLUMN_STATS_ID
+        mDatabase.delete(SQLiteHelper.TABLE_STATS, SQLiteHelper.COLUMN_STATS_ID
                 + " = " + id, null);
     }
 
     public List<Stats> getAllStats() {
         List<Stats> allStats = new ArrayList<Stats>();
 
-        Cursor cursor = database.query(SQLiteHelper.TABLE_STATS,
-                allColumns, null, null, null, null, null);
+        Cursor cursor = mDatabase.query(SQLiteHelper.TABLE_STATS,
+                mAllColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

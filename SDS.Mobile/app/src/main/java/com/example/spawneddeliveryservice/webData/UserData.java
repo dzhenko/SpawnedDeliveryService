@@ -1,30 +1,26 @@
 package com.example.spawneddeliveryservice.webData;
 
 public class UserData {
-    private static String username;
-    private static String token;
+    private static String mUsername;
+    private static String mToken;
 
     public static String getUsername() {
-        return username;
+        return mUsername;
     }
 
     public static void setUsername(String username) {
-        UserData.username = username;
+        UserData.mUsername = username;
     }
 
     public static String getToken() {
-        return token;
+        return mToken;
     }
 
     public static void setToken(String token) {
-        UserData.token = token;
+        UserData.mToken = token;
     }
 
     public static Boolean isLogged(){
-        if(UserData.token!=null){
-            return  true;
-        }
-
-        return  false;
+        return UserData.mToken!=null;
     }
 }

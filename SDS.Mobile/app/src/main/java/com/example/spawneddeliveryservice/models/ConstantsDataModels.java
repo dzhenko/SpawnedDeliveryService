@@ -3,14 +3,14 @@ package com.example.spawneddeliveryservice.models;
 import java.text.SimpleDateFormat;
 
 public class ConstantsDataModels {
-    private static SimpleDateFormat formatter;
+    private static SimpleDateFormat mFormatter;
 
     public static SimpleDateFormat getDateFormatter() {
-        if (formatter == null) {
-            formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S");
-            formatter.setLenient(false);
+        if (mFormatter == null) {
+            mFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S");
+            mFormatter.setLenient(false);
         }
 
-        return formatter;
+        return mFormatter;
     }
 }

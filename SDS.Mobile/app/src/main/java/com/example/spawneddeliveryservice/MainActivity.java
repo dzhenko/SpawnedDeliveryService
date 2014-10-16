@@ -8,7 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.spawneddeliveryservice.tasks.ActiveTransportTask;
+import com.example.spawneddeliveryservice.tasks.DbStatsPopulationTask;
+import com.example.spawneddeliveryservice.tasks.DbTownsPopulationTask;
 
 public class MainActivity extends Activity {
     private final Context context = this;
@@ -17,7 +18,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        (new ActiveTransportTask()).execute("");
+
+        (new DbTownsPopulationTask(this.context)).execute("");
+        (new DbStatsPopulationTask(this.context)).execute("");
+
         if (savedInstanceState == null) {
             this.loadLogin();
         }

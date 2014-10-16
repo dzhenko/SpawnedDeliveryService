@@ -12,30 +12,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TownsDataSource {
-    private SQLiteDatabase database;
-    private SQLiteHelper dbHelper;
-    private String[] allColumns = { SQLiteHelper.COLUMN_TOWNS_ID,
+    private SQLiteDatabase mDatabase;
+    private SQLiteHelper mDbHelper;
+    private String[] mAllColumns = { SQLiteHelper.COLUMN_TOWNS_ID,
             SQLiteHelper.COLUMN_TOWNS_NAME };
 
     public TownsDataSource(Context context) {
-        dbHelper = new SQLiteHelper(context);
+        mDbHelper = new SQLiteHelper(context);
     }
 
     public void open() throws SQLException {
-        database = dbHelper.getWritableDatabase();
+        mDatabase = mDbHelper.getWritableDatabase();
     }
 
     public void close() {
-        dbHelper.close();
+        mDbHelper.close();
     }
 
     public Town createTown(String name) {
         ContentValues values = new ContentValues();
         values.put(SQLiteHelper.COLUMN_TOWNS_NAME, name);
-        long insertId = database.insert(SQLiteHelper.TABLE_TOWNS, null,
+        long insertId = mDatabase.insert(SQLiteHelper.TABLE_TOWNS, null,
                 values);
-        Cursor cursor = database.query(SQLiteHelper.TABLE_TOWNS,
-                allColumns, SQLiteHelper.COLUMN_TOWNS_ID + " = " + insertId, null,
+        Cursor cursor = mDatabase.query(SQLiteHelper.TABLE_TOWNS,
+                mAllColumns, SQLiteHelper.COLUMN_TOWNS_ID + " = " + insertId, null,
                 null, null, null);
         cursor.moveToFirst();
         Town newTown = cursorToTown(cursor);
@@ -45,15 +45,15 @@ public class TownsDataSource {
 
     public void deleteTown(Town town) {
         long id = town.getId();
-        database.delete(SQLiteHelper.TABLE_TOWNS, SQLiteHelper.COLUMN_TOWNS_ID
+        mDatabase.delete(SQLiteHelper.TABLE_TOWNS, SQLiteHelper.COLUMN_TOWNS_ID
                 + " = " + id, null);
     }
 
     public List<Town> getAllTowns() {
         List<Town> towns = new ArrayList<Town>();
 
-        Cursor cursor = database.query(SQLiteHelper.TABLE_TOWNS,
-                allColumns, null, null, null, null, null);
+        Cursor cursor = mDatabase.query(SQLiteHelper.TABLE_TOWNS,
+                mAllColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

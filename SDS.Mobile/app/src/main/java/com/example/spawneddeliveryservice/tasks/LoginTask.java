@@ -27,10 +27,10 @@ import java.util.List;
 
 public class LoginTask extends AsyncTask<String, Void, String> {
 
-    private Context context;
+    private Context mContext;
 
     public LoginTask(Context context){
-        this.context = context;
+        this.mContext = context;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class LoginTask extends AsyncTask<String, Void, String> {
                 String userName = jObject.getString("userName");
                 if (token == null || userName == null || token == "" || userName == "") {
                     Toast.makeText(
-                            context,
+                            mContext,
                             "Login failed",
                             Toast.LENGTH_SHORT).show();
                     return;
@@ -80,22 +80,22 @@ public class LoginTask extends AsyncTask<String, Void, String> {
                 UserData.setToken(token);
                 UserData.setUsername(userName);
                 Toast.makeText(
-                        context,
+                        mContext,
                         "Hello, " + UserData.getUsername(),
                         Toast.LENGTH_SHORT).show();
 
-                context.startActivity(new Intent(context, HomeActivity.class));
+                mContext.startActivity(new Intent(mContext, HomeActivity.class));
             } catch (JSONException e) {
                 String errorDescription = jObject.getString("error_description");
                 Toast.makeText(
-                        context,
+                        mContext,
                         errorDescription,
                         Toast.LENGTH_SHORT).show();
             }
 
         } catch (JSONException e) {
             Toast.makeText(
-                    context,
+                    mContext,
                     "Login failed",
                     Toast.LENGTH_SHORT).show();
         }

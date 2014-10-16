@@ -1,8 +1,9 @@
 package com.example.spawneddeliveryservice.tasks;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
-import com.example.spawneddeliveryservice.models.ActiveTransportDataModel;
+import com.example.spawneddeliveryservice.appData.TownsDataSource;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -15,28 +16,37 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 
-public class DbPopulationTask extends AsyncTask<String, Void, ArrayList<ActiveTransportDataModel>> {
+public class DbTownsPopulationTask extends AsyncTask<String, Void, Void> {
+
+    private Context mContext;
+
+    public DbTownsPopulationTask(Context context){
+        this.mContext = context;
+    }
+
     @Override
-    protected ArrayList<ActiveTransportDataModel> doInBackground(String... params) {
+    protected Void doInBackground(String... params) {
+        TownsDataSource mTownsDb = new TownsDataSource(mContext);
+        mTownsDb.open();
+        if (mTownsDb.getAllTowns().size() > 0) {
+            return null;
+        }
+
         HttpClient httpClient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet("http://spawndeliveryservice.apphb.com" + "/api/stats/" + "active");
+        HttpGet httpGet = new HttpGet(ApiConstants.TOWNS);
 
         try {
             HttpResponse httpResponse = httpClient.execute(httpGet);
-            String body = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
-            JSONArray jObject = new JSONArray(body);
+            String response = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+            JSONArray jArray = new JSONArray(response);
 
-            ArrayList<ActiveTransportDataModel> list = new ArrayList<ActiveTransportDataModel>();
-
-            for(int i=0;i<jObject.length();i++)
+            for(int i=0;i<jArray.length();i++)
             {
-                ActiveTransportDataModel modelToAdd = ActiveTransportDataModel.FromModel(jObject.getString(i));
-                list.add(modelToAdd);
+                String townName = jArray.getString(i);
+                mTownsDb.createTown(jArray.getString(i));
             }
-
-            return list;
+            mTownsDb.close();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {
@@ -45,8 +55,11 @@ public class DbPopulationTask extends AsyncTask<String, Void, ArrayList<ActiveTr
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
+        } finally {
+            mTownsDb.close();
         }
 
+        mTownsDb.close();
         return null;
     }
 }
