@@ -41,11 +41,9 @@ public class MainActivity extends Activity {
         (new DbTownsPopulationTask(this.context)).execute("");
         (new DbStatsPopulationTask(this.context)).execute("");
 
-//        if (savedInstanceState == null) {
-//            this.loadLogin();
-//        }
-
-//        this.redirectHome();
+        if (savedInstanceState == null) {
+            this.loadLogin();
+        }
     }
 
     @Override
