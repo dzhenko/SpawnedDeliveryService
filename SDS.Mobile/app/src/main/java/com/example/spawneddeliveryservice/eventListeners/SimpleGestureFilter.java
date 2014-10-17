@@ -5,8 +5,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.GestureDetector.SimpleOnGestureListener;
 
-public class SimpleGestureFilter extends SimpleOnGestureListener{
-
+public class SimpleGestureFilter extends SimpleOnGestureListener {
     public final static int SWIPE_UP    = 1;
     public final static int SWIPE_DOWN  = 2;
     public final static int SWIPE_LEFT  = 3;
