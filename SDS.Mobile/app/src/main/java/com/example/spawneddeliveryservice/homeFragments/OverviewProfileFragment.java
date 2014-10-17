@@ -10,12 +10,35 @@ import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 
+import com.example.spawneddeliveryservice.CompassActivity;
 import com.example.spawneddeliveryservice.R;
 import com.example.spawneddeliveryservice.services.LocationTrackerService;
+import com.example.spawneddeliveryservice.services.MusicService;
 
 public class OverviewProfileFragment extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+    boolean mBound = false;
+    MusicService mService;
+    Integer[] songs = {R.raw.panther, R.raw.alpachino, R.raw.jingle};
+    private ServiceConnection mPlayerConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            // We've bound to LocalService, cast the IBinder and get
+            // LocalService instance
+            MusicService.LocalBinder binder = (MusicService.LocalBinder) service;
+            mService = binder.getService();
+            mBound = true;
+            mService.loadSong(songs[0]);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+    };
     private Context context;
     private LocationTrackerService locationService;
     private Boolean isConnected = false;
@@ -32,6 +55,7 @@ public class OverviewProfileFragment extends Fragment implements View.OnClickLis
             isConnected = false;
         }
     };
+    private Button btnShowCompass;
 
     public OverviewProfileFragment() {
     }
@@ -39,8 +63,6 @@ public class OverviewProfileFragment extends Fragment implements View.OnClickLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(this.context, LocationTrackerService.class);
-        this.context.bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override
@@ -60,15 +82,25 @@ public class OverviewProfileFragment extends Fragment implements View.OnClickLis
         View rootView = inflater.inflate(R.layout.fragment_profile_overview, container, false);
 
         this.context = container.getContext();
+        Intent intent = new Intent(this.context, LocationTrackerService.class);
+        this.context.bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+
+        Intent playerIntent = new Intent(this.context, MusicService.class);
+        this.context.bindService(playerIntent, mPlayerConnection, Context.BIND_AUTO_CREATE);
+
+        this.btnShowCompass = (Button) rootView.findViewById(R.id.btnShowCompass);
+        this.btnShowCompass.setOnClickListener(this);
 
         return rootView;
     }
 
     @Override
     public void onClick(View v) {
-//        if (v.getId() == R.id.btnPackagesAddPackage) {
-//        } else if (v.getId() == R.id.btnTransportsNewTransportAdditionalContacts) {
-//        } else if (v.getId() == R.id.btnTransportsNewTransportTakeAPicture) {
+        if (v.getId() == R.id.btnShowCompass) {
+            Intent intent = new Intent(this.context, CompassActivity.class);
+            startActivity(intent);
+        }
+//        else if (v.getId() == R.id.btnTransportsNewTransportTakeAPicture) {
 //        }
     }
 }
