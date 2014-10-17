@@ -23,7 +23,7 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
     private List<Class<?>> mCurrentPageFragments;
     private Integer mCurrentFragmentIndex = 0;
     private SimpleGestureFilter detector;
-    private Button mbtnHomeMenuPackages;
+    private Button mbtnHomeMenuPackages, mbtnHomeMenuTransports;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,8 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
 
         this.mbtnHomeMenuPackages = (Button) this.findViewById(R.id.btnHomeMenuPackages);
         this.mbtnHomeMenuPackages.setOnClickListener(this);
+        this.mbtnHomeMenuTransports = (Button) this.findViewById(R.id.btnHomeMenuTransports);
+        this.mbtnHomeMenuTransports.setOnClickListener(this);
 
         // Detect touched area
         detector = new SimpleGestureFilter(this, this);
@@ -101,6 +103,12 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
         this.changeActivity(getFragment(this.mCurrentFragmentIndex));
     }
 
+    public void loadTransports() {
+        this.mCurrentPageFragments = ApiConstants.TRANSPORT_FRAGMENTS;
+        this.mCurrentFragmentIndex = 0;
+        this.changeActivity(getFragment(this.mCurrentFragmentIndex));
+    }
+
     public void nextFragment() {
         this.mCurrentFragmentIndex++;
         if (this.mCurrentFragmentIndex >= this.mCurrentPageFragments.size()) {
@@ -125,6 +133,8 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
     public void onClick(View v) {
         if (v.getId() == R.id.btnHomeMenuPackages) {
             this.loadPackages();
+        }else if (v.getId() == R.id.btnHomeMenuTransports) {
+            this.loadTransports();
         }
     }
 
