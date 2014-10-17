@@ -1,5 +1,6 @@
 package com.example.spawneddeliveryservice.tasks;
 
+import com.example.spawneddeliveryservice.homeFragments.AddPackageFragment;
 import com.example.spawneddeliveryservice.homeFragments.FinishedPackagesFragment;
 import com.example.spawneddeliveryservice.homeFragments.FinishedTransportFragment;
 import com.example.spawneddeliveryservice.homeFragments.OverviewProfileFragment;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 
 public class ApiConstants {
     public static final ArrayList<Class<?>> PACKAGE_FRAGMENTS = new ArrayList<Class<?>>() {{
+        add(AddPackageFragment.class);
         add(OwnPackagesFragment.class);
         add(FinishedPackagesFragment.class);
     }};

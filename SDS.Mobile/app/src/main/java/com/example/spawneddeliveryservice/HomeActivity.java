@@ -1,8 +1,10 @@
 package com.example.spawneddeliveryservice;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.spawneddeliveryservice.appData.DAO;
 import com.example.spawneddeliveryservice.eventListeners.SimpleGestureFilter;
+import com.example.spawneddeliveryservice.homeFragments.AddPackageFragment;
 import com.example.spawneddeliveryservice.homeFragments.HomeFragment;
 import com.example.spawneddeliveryservice.models.Stats;
 import com.example.spawneddeliveryservice.tasks.ApiConstants;
@@ -34,8 +37,6 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
     public static final int REQUEST_CAMERA = 1;
     public static final int SELECT_FILE = 2;
     public static final int PICK_CONTACT = 3;
-    public static String base64String = "";
-    public static String selectedPhoneNumber = "";
     private final Context context = this;
     private List<Class<?>> mCurrentPageFragments;
     private Integer mCurrentFragmentIndex = 0;
@@ -178,6 +179,42 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
         return fragment;
     }
 
+    public void addContact() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+        startActivityForResult(intent, HomeActivity.PICK_CONTACT);
+    }
+
+    public void takePicture() {
+        final CharSequence[] items = {"Take Photo", "Choose from Library",
+                "Cancel"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Add Photo");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (items[item].equals("Take Photo")) {
+                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (takePictureIntent.resolveActivity(context.getPackageManager()) != null) {
+                        startActivityForResult(takePictureIntent, HomeActivity.REQUEST_CAMERA);
+                    }
+                } else if (items[item].equals("Choose from Library")) {
+                    Intent intent = new Intent(
+                            Intent.ACTION_PICK,
+                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("image/*");
+                    startActivityForResult(
+                            Intent.createChooser(intent, "Select File"),
+                            HomeActivity.SELECT_FILE);
+                } else if (items[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -187,7 +224,7 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] bytes = baos.toByteArray();
-            base64String = Base64.encodeToString(bytes, Base64.NO_WRAP);
+            AddPackageFragment.base64Image = Base64.encodeToString(bytes, Base64.NO_WRAP);
         } else if (resultCode == RESULT_OK && requestCode == SELECT_FILE) {
             Uri uri = data.getData();
             try {
@@ -195,7 +232,7 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] bytes = baos.toByteArray();
-                base64String = Base64.encodeToString(bytes, Base64.NO_WRAP);
+                AddPackageFragment.base64Image = Base64.encodeToString(bytes, Base64.NO_WRAP);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -213,7 +250,7 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
                             ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = "+ id,
                             null, null);
                     phones.moveToFirst();
-                    selectedPhoneNumber = phones.getString(phones.getColumnIndex("data1"));
+                    AddPackageFragment.phoneNumber = phones.getString(phones.getColumnIndex("data1"));
                 }
             }
         }

@@ -1,13 +1,8 @@
 package com.example.spawneddeliveryservice.homeFragments;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +29,9 @@ public class AddPackageFragment extends Fragment implements View.OnClickListener
     Spinner spFrom, spTo;
     private Context context;
     private GridView gvFinishedPackages;
+
+    public static String phoneNumber = "";
+    public static String base64Image= "";
 
     public AddPackageFragment() {
     }
@@ -89,42 +87,17 @@ public class AddPackageFragment extends Fragment implements View.OnClickListener
     }
 
     private void addPackage() {
+
         Log.d("","");
     }
 
+
+
     private void addContact() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
-        startActivityForResult(intent, HomeActivity.PICK_CONTACT);
+        ((HomeActivity)context).addContact();
     }
 
     private void takeAPicture() {
-        final CharSequence[] items = {"Take Photo", "Choose from Library",
-                "Cancel"};
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Add Photo");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (items[item].equals("Take Photo")) {
-                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    if (takePictureIntent.resolveActivity(context.getPackageManager()) != null) {
-                        startActivityForResult(takePictureIntent, HomeActivity.REQUEST_CAMERA);
-                    }
-                } else if (items[item].equals("Choose from Library")) {
-                    Intent intent = new Intent(
-                            Intent.ACTION_PICK,
-                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    intent.setType("image/*");
-                    startActivityForResult(
-                            Intent.createChooser(intent, "Select File"),
-                            HomeActivity.SELECT_FILE);
-                } else if (items[item].equals("Cancel")) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.show();
+        ((HomeActivity)context).takePicture();
     }
 }
