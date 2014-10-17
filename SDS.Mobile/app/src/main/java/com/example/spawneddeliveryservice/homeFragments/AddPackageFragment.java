@@ -3,13 +3,11 @@ package com.example.spawneddeliveryservice.homeFragments;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Spinner;
@@ -17,7 +15,9 @@ import android.widget.Spinner;
 import com.example.spawneddeliveryservice.HomeActivity;
 import com.example.spawneddeliveryservice.R;
 import com.example.spawneddeliveryservice.appData.DAO;
+import com.example.spawneddeliveryservice.models.NewPackageDataModel;
 import com.example.spawneddeliveryservice.models.Town;
+import com.example.spawneddeliveryservice.tasks.CreatePackageTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ import java.util.List;
 public class AddPackageFragment extends Fragment implements View.OnClickListener {
     Button btnImage, btnAdditionalContact, addPackage;
     EditText etPrice, etSpace, etKilograms, etNotes;
-    DatePicker etDeadline;
+    EditText etDeadline;
     Spinner spFrom, spTo;
     private Context context;
     private GridView gvFinishedPackages;
@@ -52,7 +52,7 @@ public class AddPackageFragment extends Fragment implements View.OnClickListener
         this.etPrice = (EditText) rootView.findViewById(R.id.etTransportsNewTransportPrice);
         this.etSpace = (EditText) rootView.findViewById(R.id.etTransportsNewTransportSpace);
         this.etKilograms = (EditText) rootView.findViewById(R.id.etTransportsNewTransportKilograms);
-        this.etDeadline = (DatePicker) rootView.findViewById(R.id.etTransportsNewTransportDeadline);
+        this.etDeadline = (EditText) rootView.findViewById(R.id.etTransportsNewTransportDeadline);
         this.etNotes = (EditText) rootView.findViewById(R.id.etTransportsNewTransportNotes);
 
         this.spFrom = (Spinner) rootView.findViewById(R.id.spTransportsNewTransportFrom);
@@ -87,8 +87,14 @@ public class AddPackageFragment extends Fragment implements View.OnClickListener
     }
 
     private void addPackage() {
+        List<Town> towns = DAO.getTowns(context);
 
-        Log.d("","");
+        NewPackageDataModel model = new NewPackageDataModel(base64Image, Double.parseDouble(this.etPrice.getText().toString()),
+                Integer.parseInt(this.etSpace.getText().toString()), Integer.parseInt(this.etKilograms.getText().toString()),
+                towns.get(this.spFrom.getSelectedItemPosition()).getName(), towns.get(this.spTo.getSelectedItemPosition()).getName(),
+                this.etDeadline.getText().toString(), this.etNotes.getText().toString(), phoneNumber);
+
+        (new CreatePackageTask(context)).execute(model);
     }
 
 
