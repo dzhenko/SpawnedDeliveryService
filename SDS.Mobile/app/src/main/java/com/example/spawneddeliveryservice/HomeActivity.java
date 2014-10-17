@@ -3,7 +3,14 @@ package com.example.spawneddeliveryservice;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +22,11 @@ import com.example.spawneddeliveryservice.homeFragments.HomeFragment;
 import com.example.spawneddeliveryservice.models.Stats;
 import com.example.spawneddeliveryservice.tasks.ApiConstants;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.List;
 
@@ -149,5 +161,76 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
         }
 
         return fragment;
+    }
+
+    public static final int REQUEST_CAMERA = 1;
+    public static final int SELECT_FILE = 2;
+    public static final int PICK_CONTACT = 3;
+
+    public static String base64String = "";
+    public static String selectedPhoneNumber ="";
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CAMERA) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] bytes = baos.toByteArray();
+            base64String = Base64.encodeToString(bytes, Base64.NO_WRAP);
+        } else if (resultCode == RESULT_OK && requestCode == SELECT_FILE) {
+            Uri uri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] bytes = baos.toByteArray();
+                base64String = Base64.encodeToString(bytes, Base64.NO_WRAP);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (resultCode == RESULT_OK && requestCode == PICK_CONTACT) {
+            Uri contactData = data.getData();
+            Cursor c =  managedQuery(contactData, null, null, null, null);
+            if (c.moveToFirst()) {
+                String id =c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
+
+                String hasPhone =c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+
+                if (hasPhone.equalsIgnoreCase("1")) {
+                    Cursor phones = HomeActivity.this.getContentResolver().query(
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = "+ id,
+                            null, null);
+                    phones.moveToFirst();
+                    selectedPhoneNumber = phones.getString(phones.getColumnIndex("data1"));
+                }
+            }
+        }
+    }
+
+    private String base64FromFile(File file) {
+        long length = file.length();
+        BufferedInputStream bis = null;
+        try {
+            bis = new BufferedInputStream(new FileInputStream(file));
+            byte[] fileData = new byte[(int) length];
+            //Read bytes from file
+            bis.read(fileData);
+            return Base64.encodeToString(fileData, Base64.DEFAULT);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bis != null)
+                try {
+                    bis.close();
+                } catch (IOException e) {
+                }
+        }
+
+        return "";
     }
 }

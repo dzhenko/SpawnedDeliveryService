@@ -1,21 +1,30 @@
 package com.example.spawneddeliveryservice.homeFragments;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Spinner;
 
+import com.example.spawneddeliveryservice.HomeActivity;
 import com.example.spawneddeliveryservice.R;
 import com.example.spawneddeliveryservice.appData.DAO;
 import com.example.spawneddeliveryservice.models.Town;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddPackageFragment extends Fragment implements View.OnClickListener {
@@ -58,8 +67,14 @@ public class AddPackageFragment extends Fragment implements View.OnClickListener
 
     public void loadTowns() {
         List<Town> towns = DAO.getTowns(this.context);
-//        ArrayAdapter<Town> adapter = new ArrayAdapter<Town>(this.context,R.layout.simple_spinner_item,towns);
-//        mSpinner.setAdapter(adapter);
+        ArrayList<String> townNames = new ArrayList<String>();
+        for (int i = 0; i < towns.size(); i++) {
+            townNames.add(towns.get(i).getName());
+        };
+
+        ArrayAdapter<String> adaptorNames = new ArrayAdapter<String>(this.context, android.R.layout.simple_spinner_dropdown_item, townNames);
+        this.spFrom.setAdapter(adaptorNames);
+        this.spTo.setAdapter(adaptorNames);
     }
 
     @Override
@@ -74,13 +89,42 @@ public class AddPackageFragment extends Fragment implements View.OnClickListener
     }
 
     private void addPackage() {
-        //Logic to add package
+        Log.d("","");
     }
 
     private void addContact() {
-        //Logic to add contact to form
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+        startActivityForResult(intent, HomeActivity.PICK_CONTACT);
     }
 
     private void takeAPicture() {
+        final CharSequence[] items = {"Take Photo", "Choose from Library",
+                "Cancel"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Add Photo");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (items[item].equals("Take Photo")) {
+                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (takePictureIntent.resolveActivity(context.getPackageManager()) != null) {
+                        startActivityForResult(takePictureIntent, HomeActivity.REQUEST_CAMERA);
+                    }
+                } else if (items[item].equals("Choose from Library")) {
+                    Intent intent = new Intent(
+                            Intent.ACTION_PICK,
+                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("image/*");
+                    startActivityForResult(
+                            Intent.createChooser(intent, "Select File"),
+                            HomeActivity.SELECT_FILE);
+                } else if (items[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
     }
 }
