@@ -23,8 +23,20 @@ public class FoundTransportDataModel {
             returnedModel.kilograms = jObject.getInt("Kilograms");
             returnedModel.fromTown = jObject.getString("FromTown");
             returnedModel.toTown = jObject.getString("ToTown");
-            returnedModel.arrival = ConstantsDataModels.getDateFormatter().parse(jObject.getString("Arrival"));
-            returnedModel.departure = ConstantsDataModels.getDateFormatter().parse(jObject.getString("Departure"));
+            String dateAsStringArrival = jObject.getString("Arrival");
+            try {
+                returnedModel.arrival = ConstantsDataModels.getDateFormatter().parse(dateAsStringArrival);
+            }
+            catch (Exception e) {
+                returnedModel.arrival = ConstantsDataModels.getNoMsDateFormatter().parse(dateAsStringArrival);
+            }
+            String dateAsStringDeparture = jObject.getString("Departure");
+            try {
+                returnedModel.departure = ConstantsDataModels.getDateFormatter().parse(dateAsStringDeparture);
+            }
+            catch (Exception e) {
+                returnedModel.departure = ConstantsDataModels.getNoMsDateFormatter().parse(dateAsStringDeparture);
+            }
 
             return returnedModel;
         }

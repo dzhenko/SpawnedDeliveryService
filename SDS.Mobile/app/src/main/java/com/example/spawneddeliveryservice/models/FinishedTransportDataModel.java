@@ -20,7 +20,13 @@ public class FinishedTransportDataModel {
             returnedModel.id = jObject.getInt("Id");
             returnedModel.fromTown = jObject.getString("FromTown");
             returnedModel.toTown = jObject.getString("ToTown");
-            returnedModel.arrival = ConstantsDataModels.getDateFormatter().parse(jObject.getString("Arrival"));
+            String dateAsString = jObject.getString("Arrival");
+            try {
+                returnedModel.arrival = ConstantsDataModels.getDateFormatter().parse(dateAsString);
+            }
+            catch (Exception e) {
+                returnedModel.arrival = ConstantsDataModels.getNoMsDateFormatter().parse(dateAsString);
+            }
             returnedModel.driverName = jObject.getString("DriverName");
             returnedModel.driverPhone = jObject.getString("DriverPhone");
 

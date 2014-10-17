@@ -16,8 +16,13 @@ public class ActiveTransportDataModel {
             ActiveTransportDataModel returnedModel = new ActiveTransportDataModel();
 
             returnedModel.id = jObject.getInt("Id");
-            String date = jObject.getString("ArrivalDate");
-            returnedModel.arrivalDate = ConstantsDataModels.getDateFormatter().parse(date);
+            String dateAsStringDeparture = jObject.getString("ArrivalDate");
+            try {
+                returnedModel.arrivalDate = ConstantsDataModels.getDateFormatter().parse(dateAsStringDeparture);
+            }
+            catch (Exception e) {
+                returnedModel.arrivalDate = ConstantsDataModels.getNoMsDateFormatter().parse(dateAsStringDeparture);
+            }
             returnedModel.fromTown = jObject.getString("FromTown");
             returnedModel.toTown = jObject.getString("ToTown");
 

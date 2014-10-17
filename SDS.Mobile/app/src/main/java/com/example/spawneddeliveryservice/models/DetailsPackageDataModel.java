@@ -36,7 +36,13 @@ public class DetailsPackageDataModel {
             returnedModel.kilograms = jObject.getInt("Kilograms");
             returnedModel.fromTown = jObject.getString("FromTown");
             returnedModel.toTown = jObject.getString("ToTown");
-            returnedModel.deadline = ConstantsDataModels.getDateFormatter().parse(jObject.getString("Deadline"));
+            String dateAsStringDeparture = jObject.getString("Deadline");
+            try {
+                returnedModel.deadline = ConstantsDataModels.getDateFormatter().parse(dateAsStringDeparture);
+            }
+            catch (Exception e) {
+                returnedModel.deadline = ConstantsDataModels.getNoMsDateFormatter().parse(dateAsStringDeparture);
+            }
             returnedModel.notes = jObject.getString("Notes");
             returnedModel.ownerName = jObject.getString("OwnerName");
             returnedModel.ownerPhone = jObject.getString("OwnerPhone");

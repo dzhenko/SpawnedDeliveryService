@@ -25,7 +25,13 @@ public class FoundPackageDataModel {
             returnedModel.kilograms = jObject.getInt("Kilograms");
             returnedModel.fromTown = jObject.getString("FromTown");
             returnedModel.toTown = jObject.getString("ToTown");
-            returnedModel.deadline = ConstantsDataModels.getDateFormatter().parse(jObject.getString("Deadline"));
+            String dateAsString = jObject.getString("Deadline");
+            try {
+                returnedModel.deadline = ConstantsDataModels.getDateFormatter().parse(dateAsString);
+            }
+            catch (Exception e) {
+                returnedModel.deadline = ConstantsDataModels.getNoMsDateFormatter().parse(dateAsString);
+            }
 
             return returnedModel;
         }
