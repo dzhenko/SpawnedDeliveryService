@@ -31,11 +31,16 @@ import java.lang.reflect.Constructor;
 import java.util.List;
 
 public class HomeActivity extends Activity implements SimpleGestureFilter.SimpleGestureListener, View.OnClickListener {
+    public static final int REQUEST_CAMERA = 1;
+    public static final int SELECT_FILE = 2;
+    public static final int PICK_CONTACT = 3;
+    public static String base64String = "";
+    public static String selectedPhoneNumber = "";
     private final Context context = this;
     private List<Class<?>> mCurrentPageFragments;
     private Integer mCurrentFragmentIndex = 0;
     private SimpleGestureFilter detector;
-    private Button mbtnHomeMenuPackages, mbtnHomeMenuTransports;
+    private Button mbtnHomeMenuPackages, mbtnHomeMenuTransports, mbtnHomeMenuProfile;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,8 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
         this.mbtnHomeMenuPackages.setOnClickListener(this);
         this.mbtnHomeMenuTransports = (Button) this.findViewById(R.id.btnHomeMenuTransports);
         this.mbtnHomeMenuTransports.setOnClickListener(this);
+        this.mbtnHomeMenuProfile = (Button) this.findViewById(R.id.btnHomeMenuProfile);
+        this.mbtnHomeMenuProfile.setOnClickListener(this);
 
         // Detect touched area
         detector = new SimpleGestureFilter(this, this);
@@ -121,6 +128,12 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
         this.changeActivity(getFragment(this.mCurrentFragmentIndex));
     }
 
+    public void loadProfiles() {
+        this.mCurrentPageFragments = ApiConstants.PROFILE_FRAGMENTS;
+        this.mCurrentFragmentIndex = 0;
+        this.changeActivity(getFragment(this.mCurrentFragmentIndex));
+    }
+
     public void nextFragment() {
         this.mCurrentFragmentIndex++;
         if (this.mCurrentFragmentIndex >= this.mCurrentPageFragments.size()) {
@@ -145,8 +158,10 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
     public void onClick(View v) {
         if (v.getId() == R.id.btnHomeMenuPackages) {
             this.loadPackages();
-        }else if (v.getId() == R.id.btnHomeMenuTransports) {
+        } else if (v.getId() == R.id.btnHomeMenuTransports) {
             this.loadTransports();
+        } else if (v.getId() == R.id.btnHomeMenuProfile) {
+            this.loadProfiles();
         }
     }
 
@@ -162,13 +177,6 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
 
         return fragment;
     }
-
-    public static final int REQUEST_CAMERA = 1;
-    public static final int SELECT_FILE = 2;
-    public static final int PICK_CONTACT = 3;
-
-    public static String base64String = "";
-    public static String selectedPhoneNumber ="";
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

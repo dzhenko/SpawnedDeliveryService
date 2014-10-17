@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         ConnectivityManager cm =
-                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null &&
@@ -41,9 +41,9 @@ public class MainActivity extends Activity {
         (new DbTownsPopulationTask(this.context)).execute("");
         (new DbStatsPopulationTask(this.context)).execute("");
 
-//        if (savedInstanceState == null) {
-//            this.loadLogin();
-//        }
+        if (savedInstanceState == null) {
+            this.loadLogin();
+        }
 
 //        this.redirectHome();
     }
