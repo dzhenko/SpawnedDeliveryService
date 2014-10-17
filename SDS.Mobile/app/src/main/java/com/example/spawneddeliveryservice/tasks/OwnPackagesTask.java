@@ -1,8 +1,8 @@
 package com.example.spawneddeliveryservice.tasks;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
+import com.example.spawneddeliveryservice.homeFragments.OwnPackagesFragment;
 import com.example.spawneddeliveryservice.models.OwnPackageDataModel;
 import com.example.spawneddeliveryservice.webData.UserData;
 
@@ -20,10 +20,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class OwnPackagesTask extends AsyncTask<String, Void, ArrayList<OwnPackageDataModel>> {
-    private Context mContext;
+    private OwnPackagesFragment mFragment;
 
-    public OwnPackagesTask(Context context){
-        this.mContext = context;
+    public OwnPackagesTask(OwnPackagesFragment context) {
+        this.mFragment = context;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class OwnPackagesTask extends AsyncTask<String, Void, ArrayList<OwnPackag
     protected void onPostExecute(ArrayList<OwnPackageDataModel> result) {
         super.onPostExecute(result);
 
-
+        this.mFragment.updatePageInfo(result);
     }
 }
 

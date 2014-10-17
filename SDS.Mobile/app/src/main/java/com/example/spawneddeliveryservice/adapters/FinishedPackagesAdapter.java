@@ -38,7 +38,7 @@ public class FinishedPackagesAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.finished_packages_template, parent, false);
+        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.template_finished_packages, parent, false);
 
         FinishedPackageDataModel finishedPackage = (FinishedPackageDataModel) this.getItem(position);
 //        TextView textView = new TextView(mContext);
