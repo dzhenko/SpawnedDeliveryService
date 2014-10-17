@@ -2,6 +2,7 @@ package com.example.spawneddeliveryservice.tasks;
 
 import com.example.spawneddeliveryservice.homeFragments.FinishedPackagesFragment;
 import com.example.spawneddeliveryservice.homeFragments.FinishedTransportFragment;
+import com.example.spawneddeliveryservice.homeFragments.OverviewProfileFragment;
 import com.example.spawneddeliveryservice.homeFragments.OwnPackagesFragment;
 import com.example.spawneddeliveryservice.homeFragments.PendingTransportsFragment;
 
@@ -15,6 +16,9 @@ public class ApiConstants {
     public static final ArrayList<Class<?>> TRANSPORT_FRAGMENTS = new ArrayList<Class<?>>() {{
         add(PendingTransportsFragment.class);
         add(FinishedTransportFragment.class);
+    }};
+    public static final ArrayList<Class<?>> PROFILE_FRAGMENTS = new ArrayList<Class<?>>() {{
+        add(OverviewProfileFragment.class);
     }};
     private static final String baseApiUrl = "http://spawndeliveryservice.apphb.com/api/";
     public static final String LOGIN = baseApiUrl + "account/login";

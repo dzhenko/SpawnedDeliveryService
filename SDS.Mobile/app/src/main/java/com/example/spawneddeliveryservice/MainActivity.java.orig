@@ -44,6 +44,11 @@ public class MainActivity extends Activity {
         if (savedInstanceState == null) {
             this.loadLogin();
         }
+<<<<<<< HEAD
+=======
+
+//        this.redirectHome();
+>>>>>>> e30b1544006b020ec634fe7c284e5e6acc3100f4
     }
 
     @Override
