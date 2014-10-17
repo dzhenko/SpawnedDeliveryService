@@ -6,9 +6,11 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.Menu;
@@ -30,6 +32,8 @@ public class MainActivity extends Activity {
     // picture magic starts
     private int REQUEST_CAMERA = 1;
     private int SELECT_FILE = 2;
+    private int PICK_CONTACT = 3;
+
     // picture magic final result !
     private String base64String = "";
 
@@ -37,17 +41,37 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = new Intent(this, CompassActivity.class);
-        startActivity(intent);
+
+        // check connection status
+//        ConnectivityManager cm =
+//                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//
+//        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+//        boolean isConnected = activeNetwork != null &&
+//                activeNetwork.isConnectedOrConnecting();
+//
+//        if (!isConnected) {
+//            Toast.makeText(this, "You do not have connection!", Toast.LENGTH_LONG);
+//        }
+        // check connection status
+
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+        startActivityForResult(intent, PICK_CONTACT);
+
+
+        //Intent intent = new Intent(this, CompassActivity.class);
+        //startActivity(intent);
+
         // picture magic test
         // selectImage();
 
         (new DbTownsPopulationTask(this.context)).execute("");
         (new DbStatsPopulationTask(this.context)).execute("");
 
-        if (savedInstanceState == null) {
-            this.loadLogin();
-        }
+//        if (savedInstanceState == null) {
+//            this.loadLogin();
+//        }
 
 //        this.redirectHome();
     }
@@ -140,6 +164,24 @@ public class MainActivity extends Activity {
                 base64String = Base64.encodeToString(bytes, Base64.NO_WRAP);
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        } else if (resultCode == RESULT_OK && requestCode == PICK_CONTACT) {
+            Uri contactData = data.getData();
+            Cursor c =  managedQuery(contactData, null, null, null, null);
+            if (c.moveToFirst()) {
+                String id =c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
+
+                String hasPhone =c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+
+                if (hasPhone.equalsIgnoreCase("1")) {
+                    Cursor phones = MainActivity.this.getContentResolver().query(
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = "+ id,
+                            null, null);
+                    phones.moveToFirst();
+                    String cNumber = phones.getString(phones.getColumnIndex("data1"));
+                    // action with phone!
+                }
             }
         }
     }
