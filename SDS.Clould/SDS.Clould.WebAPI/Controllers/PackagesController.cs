@@ -110,7 +110,7 @@
         public IHttpActionResult Own()
         {
             var id = User.Identity.GetUserId();
-            return this.Ok(this.Data.Packages.All().Where(p => p.Id == id && p.Deadline >= DateTime.Now).Select(OwnPackagesDataModel.FromData));
+            return this.Ok(this.Data.Packages.All().Where(p => p.UserId == id && p.Deadline >= DateTime.Now).Select(OwnPackagesDataModel.FromData));
         }
 
         /// <summary>
