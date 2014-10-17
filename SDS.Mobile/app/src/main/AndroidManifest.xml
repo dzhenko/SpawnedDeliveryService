@@ -8,8 +8,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <uses-feature android:name="android.hardware.camera"
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <uses-sdk
@@ -44,6 +47,11 @@
             android:enabled="true"
             android:exported="true" >
         </service>
+
+        <activity
+            android:name=".CompassActivity"
+            android:label="@string/title_activity_compass" >
+        </activity>
     </application>
 
 </manifest>
