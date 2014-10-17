@@ -81,13 +81,13 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
                 if (this.mCurrentPageFragments != null) {
                     this.nextFragment();
                 }
-                str = "Swipe Right";
+//                str = "Swipe Right";
                 break;
             case SimpleGestureFilter.SWIPE_LEFT:
                 if (this.mCurrentPageFragments != null) {
                     this.previousFragment();
                 }
-                str = "Swipe Left";
+//                str = "Swipe Left";
                 break;
 //            case SimpleGestureFilter.SWIPE_DOWN :  str = "Swipe Down";
 //                break;
@@ -95,7 +95,7 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
 //                break;
 
         }
-        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
     @Override
