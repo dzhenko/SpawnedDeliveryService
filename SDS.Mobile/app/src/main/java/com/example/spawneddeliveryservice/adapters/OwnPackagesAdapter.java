@@ -38,7 +38,7 @@ public class OwnPackagesAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.template_finished_packages, parent, false);
+        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.template_own_packages, parent, false);
 
         OwnPackageDataModel finishedPackage = (OwnPackageDataModel) this.getItem(position);
         TextView tvPackagesFrom = (TextView) rootView.findViewById(R.id.tvOwnPackagesFrom);

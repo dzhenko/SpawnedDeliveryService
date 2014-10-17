@@ -1,7 +1,9 @@
 package com.example.spawneddeliveryservice.tasks;
 
 import com.example.spawneddeliveryservice.homeFragments.FinishedPackagesFragment;
+import com.example.spawneddeliveryservice.homeFragments.FinishedTransportFragment;
 import com.example.spawneddeliveryservice.homeFragments.OwnPackagesFragment;
+import com.example.spawneddeliveryservice.homeFragments.PendingTransportsFragment;
 
 import java.util.ArrayList;
 
@@ -9,6 +11,10 @@ public class ApiConstants {
     public static final ArrayList<Class<?>> PACKAGE_FRAGMENTS = new ArrayList<Class<?>>() {{
         add(OwnPackagesFragment.class);
         add(FinishedPackagesFragment.class);
+    }};
+    public static final ArrayList<Class<?>> TRANSPORT_FRAGMENTS = new ArrayList<Class<?>>() {{
+        add(PendingTransportsFragment.class);
+        add(FinishedTransportFragment.class);
     }};
     private static final String baseApiUrl = "http://spawndeliveryservice.apphb.com/api/";
     public static final String LOGIN = baseApiUrl + "account/login";

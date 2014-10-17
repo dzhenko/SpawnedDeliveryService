@@ -1,8 +1,8 @@
 package com.example.spawneddeliveryservice.tasks;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
+import com.example.spawneddeliveryservice.homeFragments.FinishedTransportFragment;
 import com.example.spawneddeliveryservice.models.FinishedTransportDataModel;
 import com.example.spawneddeliveryservice.webData.UserData;
 
@@ -20,9 +20,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class FinishedTransportsTask extends AsyncTask<String, Void, ArrayList<FinishedTransportDataModel>> {
-    private Context mContext;
+    private FinishedTransportFragment mContext;
 
-    public FinishedTransportsTask(Context context){
+    public FinishedTransportsTask(FinishedTransportFragment context){
         this.mContext = context;
     }
 
@@ -63,7 +63,7 @@ public class FinishedTransportsTask extends AsyncTask<String, Void, ArrayList<Fi
     protected void onPostExecute(ArrayList<FinishedTransportDataModel> result) {
         super.onPostExecute(result);
 
-
+        this.mContext.updatePageInfo(result);
     }
 }
 
