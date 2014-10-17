@@ -21,7 +21,7 @@ import com.example.spawneddeliveryservice.services.MusicService;
 public class OverviewProfileFragment extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     boolean mBound = false;
     MusicService mService;
-    Integer[] songs = {R.raw.panther, R.raw.alpachino, R.raw.jingle};
+    //Integer[] songs = {R.raw.panther, R.raw.alpachino, R.raw.jingle};
     private ServiceConnection mPlayerConnection = new ServiceConnection() {
 
         @Override
@@ -31,7 +31,7 @@ public class OverviewProfileFragment extends Fragment implements View.OnClickLis
             MusicService.LocalBinder binder = (MusicService.LocalBinder) service;
             mService = binder.getService();
             mBound = true;
-            mService.loadSong(songs[0]);
+            //mService.loadSong(songs[0]);
         }
 
         @Override
