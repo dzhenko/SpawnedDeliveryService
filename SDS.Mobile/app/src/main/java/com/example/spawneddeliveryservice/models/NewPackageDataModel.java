@@ -1,7 +1,7 @@
 package com.example.spawneddeliveryservice.models;
 
 public class NewPackageDataModel {
-    public String picture;
+    public String picture; //
     public double price;
     public int space;
     public int kilograms;
