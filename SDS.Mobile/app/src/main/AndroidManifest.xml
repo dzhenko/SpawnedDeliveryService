@@ -51,6 +51,11 @@
             android:exported="true" >
         </service>
 
+        <service
+            android:name=".services.MusicService"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity
             android:name=".CompassActivity"
             android:label="@string/title_activity_compass" >
