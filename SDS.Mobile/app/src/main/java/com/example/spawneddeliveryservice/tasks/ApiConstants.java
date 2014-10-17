@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class ApiConstants {
     public static final ArrayList<Class<?>> PACKAGE_FRAGMENTS = new ArrayList<Class<?>>() {{
-        add(FinishedPackagesFragment.class);
         add(OwnPackagesFragment.class);
+        add(FinishedPackagesFragment.class);
     }};
     private static final String baseApiUrl = "http://spawndeliveryservice.apphb.com/api/";
     public static final String LOGIN = baseApiUrl + "account/login";
