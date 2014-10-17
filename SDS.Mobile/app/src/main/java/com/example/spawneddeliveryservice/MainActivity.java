@@ -27,6 +27,11 @@ import java.io.IOException;
 
 public class MainActivity extends Activity {
     private final Context context = this;
+    // picture magic starts
+    private int REQUEST_CAMERA = 1;
+    private int SELECT_FILE = 2;
+    // picture magic final result !
+    private String base64String = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,28 +73,25 @@ public class MainActivity extends Activity {
 
     protected void changeActivity(Fragment fragment) {
         getFragmentManager().beginTransaction()
-                .add(R.id.container, fragment).commit();
+                .replace(R.id.container, fragment).addToBackStack("tag").commit();
     }
 
-    public void loadLogin(){
+    public void loadLogin() {
         changeActivity(new LoginFragment());
     }
 
-    public void loadRegister(){
+    public void loadRegister() {
         changeActivity(new RegisterFragment());
     }
 
-    public void redirectHome(){
+    public void redirectHome() {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
-    // picture magic starts
-    private int REQUEST_CAMERA = 1;
-    private int SELECT_FILE = 2;
     private void selectImage() {
-        final CharSequence[] items = { "Take Photo", "Choose from Library",
-                "Cancel" };
+        final CharSequence[] items = {"Take Photo", "Choose from Library",
+                "Cancel"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("Add Photo");
@@ -117,8 +119,6 @@ public class MainActivity extends Activity {
         builder.show();
     }
 
-    // picture magic final result !
-    private String base64String = "";
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -128,28 +128,27 @@ public class MainActivity extends Activity {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] bytes = baos.toByteArray();
-            base64String= Base64.encodeToString(bytes, Base64.NO_WRAP);
-        }
-        else if (resultCode == RESULT_OK && requestCode == SELECT_FILE) {
+            base64String = Base64.encodeToString(bytes, Base64.NO_WRAP);
+        } else if (resultCode == RESULT_OK && requestCode == SELECT_FILE) {
             Uri uri = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] bytes = baos.toByteArray();
-                base64String= Base64.encodeToString(bytes, Base64.NO_WRAP);
+                base64String = Base64.encodeToString(bytes, Base64.NO_WRAP);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private String base64FromFile(File file){
+    private String base64FromFile(File file) {
         long length = file.length();
         BufferedInputStream bis = null;
         try {
             bis = new BufferedInputStream(new FileInputStream(file));
-            byte[] fileData = new byte[(int)length];
+            byte[] fileData = new byte[(int) length];
             //Read bytes from file
             bis.read(fileData);
             return Base64.encodeToString(fileData, Base64.DEFAULT);
@@ -157,9 +156,11 @@ public class MainActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if(bis != null)
-                try { bis.close(); }
-                catch(IOException e) {}
+            if (bis != null)
+                try {
+                    bis.close();
+                } catch (IOException e) {
+                }
         }
 
         return "";

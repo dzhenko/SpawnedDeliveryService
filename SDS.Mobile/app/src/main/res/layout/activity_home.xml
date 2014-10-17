@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal">
+    android:layout_gravity="center_horizontal"
+    android:background="#ffffff">
 
     <FrameLayout
         android:id="@+id/home_container"
@@ -15,7 +16,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -28,7 +29,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Packages" />
+            android:background="@drawable/buttonshape"
+            android:text="Packages"
+            android:textColor="@color/lightGrey" />
 
         <Button
             android:id="@+id/btnHomeMenuTransports"
@@ -36,7 +39,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Transports" />
+            android:background="@drawable/buttonshape"
+            android:text="Transports"
+            android:textColor="@color/lightGrey" />
 
         <Button
             android:id="@+id/btnHomeMenuProfile"
@@ -44,7 +49,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Profile" />
+            android:background="@drawable/buttonshape"
+            android:text="Profile"
+            android:textColor="@color/lightGrey" />
     </LinearLayout>
 
 </RelativeLayout>

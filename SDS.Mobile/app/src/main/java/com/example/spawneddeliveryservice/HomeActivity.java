@@ -56,11 +56,15 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
         switch (direction) {
 
             case SimpleGestureFilter.SWIPE_RIGHT:
-                this.nextFragment();
+                if (this.mCurrentPageFragments != null) {
+                    this.nextFragment();
+                }
                 str = "Swipe Right";
                 break;
             case SimpleGestureFilter.SWIPE_LEFT:
-                this.previousFragment();
+                if (this.mCurrentPageFragments != null) {
+                    this.previousFragment();
+                }
                 str = "Swipe Left";
                 break;
 //            case SimpleGestureFilter.SWIPE_DOWN :  str = "Swipe Down";
@@ -79,7 +83,7 @@ public class HomeActivity extends Activity implements SimpleGestureFilter.Simple
 
     protected void changeActivity(Fragment fragment) {
         getFragmentManager().beginTransaction()
-                .add(R.id.home_container, fragment).commit();
+                .replace(R.id.home_container, fragment).addToBackStack("tag").commit();
     }
 
     public void loadHome() {
